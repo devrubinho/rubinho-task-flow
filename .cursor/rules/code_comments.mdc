@@ -1,0 +1,138 @@
+---
+description: Regras sobre comentários em código - proibição de comentários explicativos, uso de dev-logs para documentação, e padrão para comentários de separação
+globs: **/*
+alwaysApply: true
+---
+
+- **Proibição de Comentários Explicativos:**
+  - **❌ NUNCA adicionar** comentários que explicam o que o código faz
+  - **❌ NUNCA adicionar** comentários como "// This function does X" ou "// Check if user exists"
+  - **❌ NUNCA adicionar** comentários inline explicando lógica de negócio
+  - **✅ O código deve ser auto-explicativo** através de nomes claros de variáveis, funções e classes
+
+- **Documentação em dev-logs:**
+  - **✅ Quando precisar explicar algo complexo**, criar um arquivo em `dev-logs/` na raiz do projeto
+  - **✅ Criar a pasta `dev-logs/`** se ela não existir
+  - **✅ Usar arquivos markdown** (`.md`) para documentação técnica
+  - **✅ Incluir contexto**, decisões de design, e explicações detalhadas nos arquivos de dev-logs
+
+- **Estrutura de dev-logs:**
+  ```
+  projeto/
+  └── dev-logs/
+      ├── architecture-decisions.md
+      ├── complex-algorithms.md
+      ├── integration-notes.md
+      └── ...
+  ```
+
+- **Quando Criar dev-logs:**
+  - Algoritmos complexos que precisam de explicação detalhada
+  - Decisões de arquitetura importantes
+  - Integrações com APIs externas complexas
+  - Workarounds ou hacks necessários
+  - Contexto histórico importante
+  - Padrões não óbvios do projeto
+
+- **Formato dos Arquivos dev-logs:**
+  ```markdown
+  # Título do Tópico
+  
+  ## Contexto
+  Explicação do contexto e por que isso é necessário...
+  
+  ## Implementação
+  Detalhes da implementação...
+  
+  ## Referências
+  - Link para documentação
+  - Issue relacionada
+  ```
+
+- **Comentários de Separação Permitidos:**
+  - **✅ PERMITIDO**: Comentários que organizam e separam blocos de código
+  - **✅ SEMPRE usar** o padrão exato de separação:
+    ```typescript
+    // ────────────────────────────────
+    // Prisma Types
+    // ────────────────────────────────
+    ```
+  - **✅ Usar** para separar seções lógicas do código
+  - **✅ Usar** para organizar imports, tipos, constantes, etc.
+
+- **Padrão de Comentário de Separação:**
+  ```typescript
+  // ────────────────────────────────
+  // Seção ou Título
+  // ────────────────────────────────
+  ```
+  
+  **Características:**
+  - Linha de traços (`─`) com exatamente 31 caracteres
+  - Título centralizado entre as linhas de separação
+  - Sempre usar `//` para comentários de linha
+  - **Sem linhas em branco** entre as linhas de separação e o título
+
+- **Exemplos de Uso Correto:**
+  
+  **✅ DO: Comentário de separação**
+  ```typescript
+  // ────────────────────────────────
+  // Type Definitions
+  // ────────────────────────────────
+  
+  export type User = {
+    id: string;
+    name: string;
+  };
+  
+  // ────────────────────────────────
+  // API Functions
+  // ────────────────────────────────
+  
+  export async function fetchUser(id: string): Promise<User> {
+    // código aqui
+  }
+  ```
+  
+  **❌ DON'T: Comentários explicativos**
+  ```typescript
+  // ❌ DON'T: This function fetches a user from the database
+  export async function fetchUser(id: string): Promise<User> {
+    // ❌ DON'T: Check if user exists
+    const user = await db.user.findUnique({ where: { id } });
+    // ❌ DON'T: Return user or throw error
+    if (!user) throw new Error('User not found');
+    return user;
+  }
+  ```
+  
+  **✅ DO: Código auto-explicativo + dev-logs se necessário**
+  ```typescript
+  export async function fetchUserById(id: string): Promise<User> {
+    const user = await db.user.findUnique({ where: { id } });
+    if (!user) throw new UserNotFoundError(id);
+    return user;
+  }
+  ```
+  
+  Se a lógica for complexa, criar `dev-logs/user-fetching.md` com explicações.
+
+- **Criação Automática de dev-logs:**
+  - **Sempre verificar** se `dev-logs/` existe antes de criar arquivo
+  - **Criar a pasta** se não existir: `mkdir -p dev-logs`
+  - **Usar nomes descritivos** para os arquivos: `kebab-case.md`
+  - **Incluir data** no conteúdo do arquivo quando relevante
+
+- **Exceções e Casos Especiais:**
+  - **NENHUMA EXCEÇÃO** para comentários explicativos no código
+  - Comentários de separação **sempre** seguem o padrão exato
+  - Documentação complexa **sempre** vai para `dev-logs/`
+
+- **Integração com Outras Regras:**
+  - [cursor_rules.mdc](mdc:.cursor/rules/cursor_rules.mdc) - Formatação de regras
+  - [self_improve.mdc](mdc:.cursor/rules/self_improve.mdc) - Melhoria contínua
+  - [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc) - Commits podem referenciar dev-logs
+
+- **Princípio Fundamental:**
+  > **O código deve ser auto-explicativo. Se algo precisa de explicação, documente em dev-logs/, não no código. Use comentários apenas para organização visual seguindo o padrão exato.**

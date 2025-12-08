@@ -1,0 +1,40 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+
+# Dependency directories
+node_modules/
+
+# Environment variables
+.env
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS specific
+.DS_Store
+
+# Taskmaster - arquivos específicos de projeto (não devem estar no template)
+.taskmaster/tasks/
+.taskmaster/state.json
+.taskmaster/config.json
+.taskmaster/CLAUDE.md
+.taskmaster/docs/
+.taskmaster/reports/
+
+# Arquivos específicos de projeto
+CLAUDE.md
+.claude/settings.local.json
+
+# Configuração MCP local (não commitar, apenas o .example)
+.cursor/mcp.json

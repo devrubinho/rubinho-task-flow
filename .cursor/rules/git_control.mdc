@@ -1,0 +1,79 @@
+---
+description: Controle total do usuário sobre comandos Git - o AI nunca executa comandos git, mas pode executar qualquer outro comando sem perguntar
+globs: **/*
+alwaysApply: true
+---
+
+- **Permissão Geral de Comandos:**
+  - **✅ PODE executar** qualquer comando do sistema sem perguntar
+  - **✅ PODE executar** npm, yarn, pnpm, docker, etc sem confirmação
+  - **✅ PODE executar** scripts, testes, linters, formatters sem perguntar
+  - **✅ NÃO precisa perguntar** antes de executar comandos simples ou comuns
+  - **❌ ÚNICA EXCEÇÃO**: Comandos `git` que modificam o repositório
+
+- **Proibição Absoluta de Executar Comandos Git:**
+  - **❌ NUNCA executar** comandos `git` automaticamente
+  - **❌ NUNCA fazer** `git add`, `git commit`, `git push`, `git pull`, `git merge`, etc
+  - **❌ NUNCA modificar** o estado do repositório git
+  - **✅ APENAS sugerir** comandos git quando apropriado
+  - **✅ APENAS ler** informações do git (git status, git diff, git log) para análise
+
+- **Comandos Git Permitidos (Apenas Leitura):**
+  - ✅ `git status` - Para verificar estado do repositório
+  - ✅ `git diff` - Para analisar mudanças
+  - ✅ `git log` - Para ver histórico
+  - ✅ `git show` - Para ver detalhes de commits
+  - ✅ `git branch` - Para listar branches (sem criar/modificar)
+  - ✅ Qualquer comando git que **apenas lê** informações
+
+- **Comandos Git Proibidos (Nunca Executar):**
+  - ❌ `git add` - O usuário adiciona arquivos
+  - ❌ `git commit` - O usuário faz commits
+  - ❌ `git push` - O usuário faz push
+  - ❌ `git pull` - O usuário faz pull
+  - ❌ `git merge` - O usuário faz merge
+  - ❌ `git checkout` - O usuário muda branches
+  - ❌ `git branch -d` ou `-D` - O usuário deleta branches
+  - ❌ `git reset` - O usuário faz reset
+  - ❌ `git rebase` - O usuário faz rebase
+  - ❌ `git tag` - O usuário cria tags
+  - ❌ Qualquer comando que **modifique** o repositório
+
+- **Quando Sugerir Comandos Git:**
+  - ✅ Após conclusão de task/subtask - sugerir mensagem de commit
+  - ✅ Quando há mudanças não commitadas - sugerir commit
+  - ✅ Quando há conflitos - sugerir resolução (mas não executar)
+  - ✅ Quando precisa atualizar - sugerir pull (mas não executar)
+  - ✅ Sempre apresentar como **sugestão**, nunca executar
+
+- **Formato de Sugestões:**
+  ```markdown
+  ✅ Task concluída!
+  
+  📝 Sugestão de commit (você executa):
+  ```bash
+  git add .
+  git commit -m "feat(module): Descrição"
+  ```
+  ```
+  
+  **NUNCA fazer:**
+  ```bash
+  # ❌ DON'T: Executar automaticamente
+  git add .
+  git commit -m "..."
+  ```
+
+- **Exceções e Casos Especiais:**
+  - **NENHUMA EXCEÇÃO para git**: Esta regra é absoluta para comandos git
+  - **Para comandos não-git**: Execute diretamente sem perguntar
+  - **Para comandos git**: Mesmo que o usuário peça explicitamente, **sempre sugerir** ao invés de executar
+  - Se houver dúvida sobre um comando ser git ou não, verificar se começa com `git` antes de executar
+
+- **Integração com Outras Regras:**
+  - [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc) - Sugerir commits, nunca executar
+  - [dev_workflow.mdc](mdc:.cursor/rules/taskmaster/dev_workflow.mdc) - Workflow não deve incluir execução automática de git
+  - [hamster.mdc](mdc:.cursor/rules/taskmaster/hamster.mdc) - Workflow Hamster não deve executar git
+
+- **Princípio Fundamental:**
+  > **O usuário tem controle total sobre o repositório Git. O AI pode executar qualquer comando do sistema sem perguntar, EXCETO comandos git. Para git, apenas sugere, analisa e informa. Nunca modifica o estado do git.**

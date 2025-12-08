@@ -1,0 +1,138 @@
+---
+description: Gerenciamento automático de status de tasks durante execução e sugestão de commit ao finalizar
+globs: **/*
+alwaysApply: true
+---
+
+- **Gerenciamento Automático de Status de Tasks:**
+  - **Antes de executar tasks**: Sempre marcar como `in-progress` antes de começar
+  - **Após finalizar tasks**: Sempre marcar como `done` ao concluir
+  - **Sugerir commit**: Após marcar como done, sugerir git add e git commit com mensagem descritiva
+
+- **Quando Aplicar:**
+  - Quando o usuário pedir para executar uma ou mais tasks
+  - Quando o usuário pedir para implementar funcionalidades relacionadas a tasks
+  - Quando o usuário pedir para trabalhar em tarefas específicas
+
+- **Processo de Execução:**
+  1. **Identificar tasks**: Quando o usuário mencionar tasks a serem executadas, identificar os IDs
+  2. **Marcar como in-progress**: Antes de começar, usar `set_task_status` para marcar como `in-progress`
+  3. **Executar trabalho**: Implementar as tasks normalmente
+  4. **Marcar como done**: Após conclusão, usar `set_task_status` para marcar como `done`
+  5. **Sugerir commit**: Analisar mudanças e sugerir git add + git commit
+
+- **Marcação de Status:**
+  ```bash
+  # Antes de executar (sempre fazer primeiro)
+  task-master set-status --id=1,2,3 --status=in-progress
+  
+  # Após finalizar (sempre fazer ao concluir)
+  task-master set-status --id=1,2,3 --status=done
+  ```
+
+- **Sugestão de Commit:**
+  - **Analisar mudanças**: Usar `git status` e `git diff` para identificar arquivos modificados
+  - **Gerar mensagem**: Criar mensagem baseada nas tasks executadas
+  - **Seguir formato**: Usar conventional commits conforme [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc)
+  - **NUNCA executar git**: Apenas sugerir, seguindo [git_control.mdc](mdc:.cursor/rules/git_control.mdc)
+
+- **Formato da Sugestão de Commit:**
+  ```bash
+  # ✅ DO: Formato recomendado
+  git add .
+  git commit -m "feat(module): Implement tasks X, Y, Z
+  
+  - Task X: Descrição do que foi feito
+  - Task Y: Descrição do que foi feito
+  - Task Z: Descrição do que foi feito
+  
+  Tasks: 1, 2, 3"
+  ```
+
+- **Exemplos de Fluxo:**
+  
+  **Exemplo 1: Executar uma task**
+  ```markdown
+  Usuário: "Execute a task 5"
+  
+  Ações do AI:
+  1. task-master set-status --id=5 --status=in-progress
+  2. [Implementar task 5]
+  3. task-master set-status --id=5 --status=done
+  4. Sugerir commit:
+     ```bash
+     git add .
+     git commit -m "feat(module): Implement task 5 - [descrição]
+     
+     - [detalhes da implementação]
+     - Task ID: 5"
+     ```
+  ```
+  
+  **Exemplo 2: Executar múltiplas tasks**
+  ```markdown
+  Usuário: "Execute as tasks 3, 4 e 7"
+  
+  Ações do AI:
+  1. task-master set-status --id=3,4,7 --status=in-progress
+  2. [Implementar tasks 3, 4, 7]
+  3. task-master set-status --id=3,4,7 --status=done
+  4. Sugerir commit:
+     ```bash
+     git add .
+     git commit -m "feat(module): Implement tasks 3, 4, 7
+     
+     - Task 3: [descrição]
+     - Task 4: [descrição]
+     - Task 7: [descrição]
+     
+     Tasks: 3, 4, 7"
+     ```
+  ```
+
+- **Identificação de Tasks:**
+  - Se o usuário mencionar números (ex: "task 5", "tasks 1,2,3"), usar esses IDs
+  - Se o usuário mencionar títulos, buscar tasks correspondentes usando `get_tasks`
+  - Se não houver contexto claro, perguntar ao usuário quais tasks executar
+
+- **Análise de Mudanças para Commit:**
+  - Usar `git status --short` para listar arquivos modificados
+  - Usar `git diff --stat` para estatísticas de mudanças
+  - Incluir resumo das mudanças na mensagem de commit
+  - Mencionar arquivos principais modificados se relevante
+
+- **Apresentação da Sugestão:**
+  ```markdown
+  ✅ Tasks 3, 4, 7 concluídas!
+  
+  📝 Sugestão de commit:
+  ```bash
+  git add .
+  git commit -m "feat(api): Implement authentication and user management
+  
+  - Task 3: Add user login endpoint
+  - Task 4: Implement JWT token generation
+  - Task 7: Add user registration
+  
+  Tasks: 3, 4, 7"
+  ```
+  
+  📊 Mudanças detectadas:
+  - 5 arquivos modificados
+  - 120 linhas adicionadas, 8 removidas
+  ```
+
+- **Integração com Outras Regras:**
+  - Seguir [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc) para formato de commit
+  - Seguir [git_control.mdc](mdc:.cursor/rules/git_control.mdc) - NUNCA executar git, apenas sugerir
+  - Seguir [dev_workflow.mdc](mdc:.cursor/rules/taskmaster/dev_workflow.mdc) para workflow de desenvolvimento
+  - Usar ferramentas MCP do Taskmaster quando disponíveis
+
+- **Casos Especiais:**
+  - **Se task já está in-progress**: Não precisa marcar novamente, apenas continuar
+  - **Se task falhar**: Marcar como apropriado (pode deixar in-progress ou criar subtask para o problema)
+  - **Se usuário cancelar**: Perguntar se deve manter in-progress ou reverter para pending
+  - **Se não houver mudanças no git**: Ainda sugerir commit, mas mencionar que não há mudanças
+
+- **Princípio Fundamental:**
+  > **Sempre gerenciar o status das tasks automaticamente. Antes de executar: in-progress. Após concluir: done + sugestão de commit. Nunca executar comandos git, apenas sugerir.**

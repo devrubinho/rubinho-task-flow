@@ -1,0 +1,142 @@
+---
+description: Práticas de commit após conclusão de tarefas e subtarefas, incluindo sugestões automáticas de mensagens
+globs: **/*
+alwaysApply: true
+---
+
+- **Notificação e Sugestão de Commit Após Tarefas:**
+  - **Sempre avisar o usuário** quando uma task ou subtask for marcada como `done`
+  - **Sugerir uma mensagem de commit** baseada nas mudanças realizadas
+  - **Incluir contexto** da task/subtask na sugestão de commit
+  - **CRÍTICO: NUNCA executar comandos git** - apenas sugerir, o usuário executa
+
+- **Quando Aplicar:**
+  - Após `set_task_status` com status `done` para qualquer task ou subtask
+  - Após implementação completa de uma subtask
+  - Após conclusão de uma task pai (quando todas subtasks estiverem done)
+
+- **Formato da Sugestão de Commit:**
+  ```bash
+  # ✅ DO: Formato recomendado
+  git commit -m "feat(module): Descrição curta da mudança
+  
+  - Detalhes da implementação
+  - Task/Subtask ID: X.Y
+  - Mudanças principais realizadas"
+  
+  # Exemplo real:
+  git commit -m "feat(auth): Implement user login validation
+  
+  - Add email format validation
+  - Add password strength checks
+  - Task ID: 3.2"
+  ```
+
+- **Processo de Sugestão:**
+  1. **Analisar mudanças**: Usar `git status` e `git diff` para identificar arquivos modificados (apenas leitura, nunca modificar)
+  2. **Extrair contexto da task**: Incluir ID da task/subtask e título/descrição
+  3. **Gerar mensagem**: Criar mensagem seguindo conventional commits
+  4. **Apresentar ao usuário**: Mostrar sugestão formatada e pronta para uso
+  5. **NUNCA executar**: Apenas sugerir, o usuário decide quando e como fazer o commit
+
+- **Tipos de Commit (Conventional Commits):**
+  - `feat`: Nova funcionalidade (task completa)
+  - `fix`: Correção de bug
+  - `refactor`: Refatoração sem mudança de comportamento
+  - `docs`: Mudanças em documentação
+  - `style`: Formatação, ponto e vírgula, etc (sem mudança de código)
+  - `test`: Adição ou correção de testes
+  - `chore`: Mudanças em build, dependências, etc
+
+- **Estrutura da Mensagem Sugerida:**
+  ```bash
+  <tipo>(<escopo>): <descrição curta>
+  
+  <corpo opcional com detalhes>
+  - Task/Subtask: <ID>
+  - Arquivos modificados: <lista resumida>
+  ```
+
+- **Exemplos de Sugestões:**
+  
+  **Para subtask de implementação:**
+  ```bash
+  git commit -m "feat(api): Add user authentication endpoint
+  
+  - Implement POST /api/auth/login
+  - Add JWT token generation
+  - Add input validation middleware
+  - Subtask ID: 5.3"
+  ```
+  
+  **Para task completa:**
+  ```bash
+  git commit -m "feat(dashboard): Complete user analytics dashboard
+  
+  - Add real-time metrics display
+  - Implement chart visualizations
+  - Add data export functionality
+  - Task ID: 7"
+  ```
+  
+  **Para correção:**
+  ```bash
+  git commit -m "fix(auth): Resolve token expiration issue
+  
+  - Fix JWT refresh logic
+  - Update token validation
+  - Subtask ID: 8.1"
+  ```
+
+- **Comandos Úteis para Análise:**
+  - `git status --short` - Lista arquivos modificados de forma compacta
+  - `git diff --stat` - Estatísticas de mudanças
+  - `git diff --name-only` - Apenas nomes dos arquivos modificados
+  - `git log --oneline -5` - Últimos commits para contexto
+
+- **Quando NÃO Sugerir Commit:**
+  - ❌ DON'T: Se não houver mudanças no git (nenhum arquivo modificado)
+  - ❌ DON'T: Se o usuário já fez commit recentemente (últimos 5 minutos)
+  - ❌ DON'T: Se houver conflitos de merge não resolvidos
+  - ❌ DON'T: Se o repositório não for um git repo
+
+- **Apresentação da Sugestão:**
+  - **Sempre notificar o usuário** quando uma task/subtask for concluída com mensagem clara e emoji ✅
+  - **Mostrar sugestão formatada** pronta para copiar/colar
+  - **Incluir estatísticas** das mudanças (arquivos modificados, linhas adicionadas/removidas)
+  
+  **Exemplo de apresentação:**
+  ```markdown
+  ✅ Task 3.2 concluída!
+  
+  📝 Sugestão de commit:
+  ```bash
+  git commit -m "feat(module): Descrição da mudança
+  
+  - Detalhe 1
+  - Detalhe 2
+  - Task ID: 3.2"
+  ```
+  
+  📊 Mudanças detectadas:
+  - 3 arquivos modificados
+  - 45 linhas adicionadas, 12 removidas
+  ```
+
+- **Integração com Taskmaster:**
+  - Após `set_task_status --id=<id> --status=done`, automaticamente:
+    1. Verificar se há mudanças no git
+    2. Analisar arquivos modificados
+    3. Gerar sugestão de commit baseada na task
+    4. Apresentar ao usuário de forma clara
+
+- **Controle Git:**
+  - **NUNCA executar comandos git** - apenas sugerir
+  - Seguir [git_control.mdc](mdc:.cursor/rules/git_control.mdc) para controle total do usuário sobre git
+  - Apresentar sugestões prontas para o usuário copiar e executar
+
+- **Referências:**
+  - Seguir padrões de [Conventional Commits](https://www.conventionalcommits.org/)
+  - Integrar com workflow do [dev_workflow.mdc](mdc:.cursor/rules/taskmaster/dev_workflow.mdc)
+  - Considerar contexto da task de [taskmaster.mdc](mdc:.cursor/rules/taskmaster/taskmaster.mdc)
+  - Controle git: [git_control.mdc](mdc:.cursor/rules/git_control.mdc)
