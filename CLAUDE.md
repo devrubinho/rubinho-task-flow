@@ -1,15 +1,25 @@
 # Claude Code Instructions
 
-## Task Master AI Instructions
-**Import Task Master's development workflow commands and guidelines, treat as if import is in the main CLAUDE.md file.**
-@./.taskmaster/CLAUDE.md
-
 ## Development Rules
+
 All development rules are automatically loaded from `.cursor/rules/` directory. These rules include:
 - Cursor rules formatting guidelines
 - Self-improvement processes
-- Taskmaster workflow and commands
-- Hamster integration (when applicable)
+- Code commenting standards
+- Commit practices
+- Git command control
+- Task execution management with Rubinho Task Flow
+
+## Rubinho Task Flow
+
+This project uses Rubinho Task Flow for task management:
+- **Task Definition**: Edit `.task-flow/tasks.txt` using format `- [ ] Task description`
+- **CLI**: Use `./rubinho-task-flow.sh` for all task management operations
+- **Interactive Menu**: The script provides an interactive menu with options to:
+  - Generate tasks from tasks.txt using AI
+  - View task status and progress
+  - View detailed task instructions
+  - Mark subtasks as done
+  - Edit tasks.txt directly
 
 Follow all rules defined in `.cursor/rules/` for consistent development practices.
-

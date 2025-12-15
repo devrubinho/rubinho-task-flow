@@ -1,13 +1,13 @@
-# Vibe Coding Rules
+# Rubinho Task Flow
 
 <div align="center">
 
 ![Claude](https://img.shields.io/badge/Claude-Sonnet%204.5-8A2BE2?style=for-the-badge&logo=anthropic&logoColor=white)
 ![Cursor](https://img.shields.io/badge/Cursor-IDE-blue?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-![Task Master](https://img.shields.io/badge/Task%20Master-AI-green?style=for-the-badge)
+![Task Flow](https://img.shields.io/badge/Task%20Flow-AI%20Powered-green?style=for-the-badge)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
-**One-command setup for Claude Code, Cursor, and Taskmaster in any project**
+**One-command setup for Claude Code, Cursor, and Rubinho Task Flow in any project**
 
 </div>
 
@@ -15,23 +15,22 @@
 
 ## Overview
 
-A centralized repository of development configurations and rules that can be instantly installed in any project. Provides complete setup for Claude Code, Cursor IDE, and Taskmaster AI with a single command.
+A centralized repository of development configurations and rules that can be instantly installed in any project. Provides complete setup for Claude Code, Cursor IDE, and Rubinho Task Flow - a simple AI-powered task management system.
 
 ### Key Features
 
 - **One-Command Installation** - Complete setup with `./install-rules.sh`
-- **Always Overwrites** - Fresh configs every time, no conflicts
+- **Simple Task Management** - Define tasks in plain text, AI generates detailed subtasks
 - **Claude as Default** - Claude Code Sonnet configured across all tools
 - **Discrete .gitignore** - AI configs hidden with generic comments
-- **Zero Configuration** - No need to run `task-master init` or configure manually
-- **Complete Templates** - PRD examples, commands, and workflows included
+- **Zero Configuration** - Ready to use immediately
+- **Rubinho Task Flow** - AI-powered task management with simple text interface
 
 ## System Requirements
 
 - **Operating System:** macOS, Linux, or Windows (WSL)
-- **Tools:** Git, Bash
-- **Optional:** Claude Code CLI, Cursor IDE, Taskmaster AI
-- **API Keys:** Anthropic API key (required), Perplexity API key (optional)
+- **Tools:** Git, Bash, Node.js
+- **Required:** Claude Code CLI or Cursor IDE (with Pro subscription)
 
 ## Installation
 
@@ -39,12 +38,18 @@ A centralized repository of development configurations and rules that can be ins
 
 ```bash
 # 1. Clone this repository (one time only)
-git clone https://github.com/rubensdeoliveira/vibe-coding-rules.git ~/.vibe-coding-rules
+git clone https://github.com/rubensdeoliveira/rubinho-task-flow.git ~/.rubinho-task-flow
 
-# 2. In any new project, run the installer
-cd /your/project
-~/.vibe-coding-rules/install-rules.sh
+# 2. Install in your project
+~/.rubinho-task-flow/install.sh
+# Enter your project path when prompted
+
+# 3. Go to your project and run the task manager
+cd /path/to/your/project
+./rubinho-task-flow.sh
 ```
+
+**That's it!** The interactive menu guides you through everything.
 
 ### What Gets Installed
 
@@ -59,121 +64,104 @@ your-project/
 │   │   ├── code_comments.mdc
 │   │   ├── commit_practices.mdc
 │   │   ├── git_control.mdc
-│   │   ├── task_execution.mdc
-│   │   └── taskmaster/
-│   │       ├── dev_workflow.mdc
-│   │       ├── taskmaster.mdc
-│   │       └── hamster.mdc
+│   │   └── task_execution.mdc
 │   └── mcp.json                  # MCP server config
 │
 ├── .claude/
-│   ├── settings.json             # Claude Code settings
-│   └── commands/
-│       └── taskmaster.md         # Taskmaster commands
+│   └── settings.json             # Claude Code settings
 │
-├── .taskmaster/
-│   ├── config.json               # Pre-configured with Claude Sonnet
-│   ├── CLAUDE.md                 # Claude instructions
-│   └── templates/
-│       └── prd-example.md        # Complete PRD example
+├── .task-flow/                   # Rubinho Task Flow
+│   ├── tasks.txt                 # Plain text task definitions
+│   ├── tasks.json                # Generated tasks (auto)
+│   ├── status.json               # Task status tracking (auto)
+│   ├── generate.js               # AI generation script
+│   ├── status.sh                 # Status viewer
+│   ├── show.sh                   # Task details viewer
+│   └── done.sh                   # Mark tasks as done
 │
-├── .mcp.json                     # MCP config for Claude Code
-├── .env                          # API keys template
-├── CLAUDE.md                     # Main Claude instructions
+├── rubinho-task-flow.sh          # Task Flow CLI
 └── .gitignore                    # Updated with discrete entries
 ```
 
 ## Configuration
 
-### 1. Add API Keys
+No additional configuration required! Just make sure you have:
+- Claude Code CLI installed, OR
+- Cursor IDE with an active Pro subscription
 
-Edit `.env` and add your keys:
-
-```bash
-ANTHROPIC_API_KEY=your-anthropic-key-here
-PERPLEXITY_API_KEY=your-perplexity-key-here
-```
-
-### 2. Update MCP Configs
-
-Copy the same keys to:
-- `.mcp.json` (for Claude Code)
-- `.cursor/mcp.json` (for Cursor)
-
-Or use environment variables (recommended).
-
-### 3. Restart Cursor
-
-Restart Cursor IDE to load the MCP server.
-
-### 4. Verify Setup
-
-Check `.taskmaster/config.json` - should show:
-
-```json
-{
-  "models": {
-    "main": {
-      "provider": "claude-code",
-      "modelId": "sonnet"
-    },
-    "research": {
-      "provider": "claude-code",
-      "modelId": "sonnet"
-    },
-    "fallback": {
-      "provider": "claude-code",
-      "modelId": "sonnet"
-    }
-  }
-}
-```
-
-**You're ready!** No need to run `task-master init`.
+**You're ready!**
 
 ## Usage
 
-### Basic Workflow
+### Rubinho Task Flow - Interactive Menu
+
+Just run the script and navigate through the menu:
 
 ```bash
-# Create a PRD (Product Requirements Document)
-vim .taskmaster/docs/prd.txt
-
-# Parse the PRD to generate tasks
-task-master parse-prd .taskmaster/docs/prd.txt
-
-# Analyze task complexity
-task-master analyze-complexity --research
-
-# Expand tasks into subtasks
-task-master expand --all --research
-
-# Start working
-task-master next
+./rubinho-task-flow.sh
 ```
+
+O menu apresenta as seguintes opções:
+
+**Menu Principal** (quando executado fora de um projeto):
+1. 🚀 **Instalar em um projeto** - Instala o Task Flow em qualquer projeto
+2. 📋 **Gerenciar tasks** - Acessa o menu de gerenciamento de tasks
+0. 🚪 **Sair**
+
+**Menu de Gerenciamento** (quando executado dentro de um projeto):
+1. 🤖 **Gerar tasks do arquivo tasks.txt** - AI transforma suas tasks em subtasks detalhadas
+2. 📊 **Ver status de todas as tasks** - Visualiza progresso geral
+3. 🔍 **Ver detalhes de uma task** - Mostra instruções detalhadas
+4. ✅ **Marcar subtask como concluída** - Atualiza progresso
+5. ✏️ **Editar tasks.txt** - Abre o editor para adicionar/modificar tasks
+0. 🚪 **Sair**
+
+**Complete workflow:**
+
+```bash
+# 1. Clone the repository (one time)
+git clone https://github.com/rubensdeoliveira/rubinho-task-flow.git ~/.rubinho-task-flow
+
+# 2. Install in your project
+~/.rubinho-task-flow/install.sh
+# Enter: /path/to/my-project
+
+# 3. Go to your project
+cd /path/to/my-project
+
+# 4. Run the task manager
+./rubinho-task-flow.sh
+
+# 5. Use the menu options:
+#    - Option 5: Edit tasks.txt and add your tasks
+#    - Option 1: Generate tasks with AI
+#    - Option 2: View status
+#    - Option 3: View task details
+#    - Option 4: Mark subtask as done
+```
+
+**Key features:**
+- ✅ **tasks.json** and **status.json** are automatically **gitignored**
+- ✅ Your task progress stays **local and private**
+- ✅ Team members can use their own tasks without conflicts
+- ✅ **tasks.txt** can be committed (your choice) or gitignored
+- ✅ AI generates detailed, actionable subtasks from simple descriptions
 
 ### Cursor Integration
 
 All rules are automatically active in Cursor. The IDE will:
 - Follow coding standards from `.cursor/rules/`
-- Use Taskmaster workflows from `.cursor/rules/taskmaster/`
-- Connect to Taskmaster via MCP server
+- Integrate with Rubinho Task Flow workflows
+- Follow commit and git practices
 
 ### Claude Code Integration
 
 Claude Code is pre-configured with:
-- MCP server connection to Taskmaster
-- Custom commands in `.claude/commands/`
-- Development rules from CLAUDE.md
+- Custom settings
+- Rubinho Task Flow integration
+- Development best practices
 
 ## What's Configured
-
-### Claude Code Sonnet
-
-All Taskmaster operations use **Claude Code Sonnet**:
-- **Main model** (generation/updates) → `claude-code/sonnet`
-- **Research model** → `claude-code/sonnet`
-- **Fallback model** → `claude-code/sonnet`
 
 ### Development Rules
 
@@ -184,38 +172,28 @@ Included rules for:
 - Commit practices
 - Git command control
 - Task execution management
-- Complete Taskmaster workflows
 
-### Templates
+### Rubinho Task Flow
 
-Pre-configured templates:
-- **PRD Example** - Complete authentication system PRD
-- **Taskmaster Commands** - Ready-to-use slash commands
-- **Workflows** - Optimized development processes
+Simple yet powerful task management:
+- **Plain Text Input**: Write tasks in `.task-flow/tasks.txt` using simple format
+- **AI-Powered Generation**: Transforms simple tasks into detailed, actionable subtasks
+- **Smart Instructions**: Each subtask includes context, objectives, implementation steps, and validation
+- **Simple Tracking**: JSON-based status management with easy CLI commands
+- **Progress Monitoring**: Clear visual feedback on task completion
 
 ## Discrete .gitignore
 
 The installer adds configs to `.gitignore` with **generic comments**:
 
 ```gitignore
-# Local configuration
-.env
-.env.local
-.mcp.json
-CLAUDE.md
-
 # IDE and tools
 .claude/
-.cursor/mcp.json
 .cursor/rules/*.local.mdc
 
 # Task management
-.taskmaster/tasks/
-.taskmaster/state.json
-.taskmaster/config.json
-.taskmaster/CLAUDE.md
-.taskmaster/docs/
-.taskmaster/reports/
+.task-flow/tasks.json
+.task-flow/status.json
 ```
 
 **Why discrete?**
@@ -229,66 +207,56 @@ CLAUDE.md
 To update configs in an existing project:
 
 ```bash
-cd /your/project
-~/.vibe-coding-rules/install-rules.sh
+~/.rubinho-task-flow/install.sh
+# Enter the project path
 ```
 
-The script will:
+The installer will:
 - ✅ Copy new rules
 - ✅ **Overwrite all configs** with latest versions
 - ✅ Update .gitignore if needed
-- ✅ Refresh templates
+- ✅ Update Task Flow scripts
+
+**Note**: The installer automatically adds `.task-flow/tasks.json` and `.task-flow/status.json` to `.gitignore`, keeping your task progress private and out of version control.
 
 ## Project Structure
 
 This repository contains:
 
 ```
-vibe-coding-rules/
+rubinho-task-flow/
 ├── .cursor/
 │   ├── mcp.json.example          # MCP config template
 │   └── rules/                    # All development rules
 │
 ├── .claude/
-│   ├── settings.json             # Claude Code settings
-│   └── commands/                 # Custom commands
+│   └── settings.json             # Claude Code settings
 │
-├── .taskmaster/
-│   ├── config.json.example       # Pre-configured with Claude
-│   ├── CLAUDE.md.example         # Claude instructions
-│   └── templates/                # PRD and other templates
+├── .task-flow/
+│   ├── tasks.txt                 # Task definitions template
+│   ├── generate.js               # AI generation script
+│   ├── status.sh                 # Status viewer
+│   ├── show.sh                   # Task details viewer
+│   └── done.sh                   # Mark tasks as done
 │
-├── .mcp.json                     # Root MCP config
-├── .env.example                  # API keys template
 ├── .gitignore                    # Template gitignore
 ├── CLAUDE.md                     # Main Claude instructions
-├── CHANGELOG.md                  # Version history
-├── install-rules.sh              # Installation script
+├── install.sh                    # Installation script
+├── rubinho-task-flow.sh          # Task Flow CLI (copied to projects)
 └── README.md                     # This file
 ```
 
-## API Keys
-
-### Required
-
-**ANTHROPIC_API_KEY** - For Claude
-- Used in: Claude Code, Cursor (via MCP), Taskmaster
-- Get it at: https://console.anthropic.com/
-
-### Optional
-
-**PERPLEXITY_API_KEY** - For research tasks
-- Used in: Taskmaster research operations
-- Get it at: https://www.perplexity.ai/settings/api
-
 ## Important Notes
 
-- ⚠️ This is a **template repository** - don't use Taskmaster here
-- ✅ Use Taskmaster in **projects that receive** the configs
-- 🔄 Script **always overwrites** existing configs
+- ⚠️ This is a **template repository** - don't use Rubinho Task Flow here
+- ✅ Use Rubinho Task Flow in **projects that receive** the configs via installation
+- 🔄 Installer **always overwrites** existing configs
 - 🤫 .gitignore entries are **discrete** (no AI mentions)
-- 🎯 Claude Code Sonnet is **default everywhere**
-- 📦 Configs are **gitignored** in destination projects
+- 🎯 Works with **Claude Code CLI** or **Cursor Pro**
+- 📦 Task progress files (`tasks.json`, `status.json`) are **automatically gitignored**
+- 📝 Define tasks in `.task-flow/tasks.txt` using simple format: `- [ ] Task description`
+- 🚀 Simple installation with `install.sh`, management with `rubinho-task-flow.sh`
+- 🔒 **No API keys needed** - uses Claude Code or Cursor Pro built-in AI
 
 ## Contributing
 
@@ -315,8 +283,8 @@ For issues or questions:
 
 <div align="center">
 
-**Made with ❤️ for developers who vibe with AI-powered workflows**
+**Made with ❤️ for developers who love simple, AI-powered workflows**
 
-[⬆ Back to top](#vibe-coding-rules)
+[⬆ Back to top](#rubinho-task-flow)
 
 </div>

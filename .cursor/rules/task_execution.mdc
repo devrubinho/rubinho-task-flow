@@ -24,10 +24,10 @@ alwaysApply: true
 - **Marcação de Status:**
   ```bash
   # Antes de executar (sempre fazer primeiro)
-  task-master set-status --id=1,2,3 --status=in-progress
-  
+  ./aitask done <id>  # Marcar como in-progress manualmente se necessário
+
   # Após finalizar (sempre fazer ao concluir)
-  task-master set-status --id=1,2,3 --status=done
+  ./aitask done <id>  # Marca task/subtask como done
   ```
 
 - **Sugestão de Commit:**
@@ -41,58 +41,60 @@ alwaysApply: true
   # ✅ DO: Formato recomendado
   git add .
   git commit -m "feat(module): Implement tasks X, Y, Z
-  
+
   - Task X: Descrição do que foi feito
   - Task Y: Descrição do que foi feito
   - Task Z: Descrição do que foi feito
-  
+
   Tasks: 1, 2, 3"
   ```
 
 - **Exemplos de Fluxo:**
-  
-  **Exemplo 1: Executar uma task**
+
+  **Exemplo 1: Executar uma subtask**
   ```markdown
-  Usuário: "Execute a task 5"
-  
+  Usuário: "Execute a subtask 1.2"
+
   Ações do AI:
-  1. task-master set-status --id=5 --status=in-progress
-  2. [Implementar task 5]
-  3. task-master set-status --id=5 --status=done
+  1. ./aitask show 1.2  # Ver instruções detalhadas
+  2. [Implementar subtask 1.2 seguindo instruções]
+  3. ./aitask done 1.2  # Marcar como done
   4. Sugerir commit:
      ```bash
      git add .
-     git commit -m "feat(module): Implement task 5 - [descrição]
-     
+     git commit -m "feat(module): Complete subtask 1.2 - [descrição]
+
      - [detalhes da implementação]
-     - Task ID: 5"
+     - Subtask ID: 1.2"
      ```
   ```
-  
-  **Exemplo 2: Executar múltiplas tasks**
+
+  **Exemplo 2: Executar múltiplas subtasks**
   ```markdown
-  Usuário: "Execute as tasks 3, 4 e 7"
-  
+  Usuário: "Execute as subtasks 1.1, 1.2 e 1.3"
+
   Ações do AI:
-  1. task-master set-status --id=3,4,7 --status=in-progress
-  2. [Implementar tasks 3, 4, 7]
-  3. task-master set-status --id=3,4,7 --status=done
-  4. Sugerir commit:
+  1. [Implementar cada subtask seguindo instruções de ./aitask show]
+  2. ./aitask done 1.1
+  3. ./aitask done 1.2
+  4. ./aitask done 1.3
+  5. Sugerir commit:
      ```bash
      git add .
-     git commit -m "feat(module): Implement tasks 3, 4, 7
-     
-     - Task 3: [descrição]
-     - Task 4: [descrição]
-     - Task 7: [descrição]
-     
-     Tasks: 3, 4, 7"
+     git commit -m "feat(module): Complete subtasks 1.1, 1.2, 1.3
+
+     - Subtask 1.1: [descrição]
+     - Subtask 1.2: [descrição]
+     - Subtask 1.3: [descrição]
+
+     Subtasks: 1.1, 1.2, 1.3"
      ```
   ```
 
 - **Identificação de Tasks:**
-  - Se o usuário mencionar números (ex: "task 5", "tasks 1,2,3"), usar esses IDs
-  - Se o usuário mencionar títulos, buscar tasks correspondentes usando `get_tasks`
+  - Se o usuário mencionar números (ex: "subtask 1.2", "tasks 1.1,1.2,1.3"), usar esses IDs
+  - Usar `./aitask list` para ver tasks disponíveis
+  - Usar `./aitask show <id>` para ver detalhes de uma task/subtask
   - Se não houver contexto claro, perguntar ao usuário quais tasks executar
 
 - **Análise de Mudanças para Commit:**
@@ -104,19 +106,19 @@ alwaysApply: true
 - **Apresentação da Sugestão:**
   ```markdown
   ✅ Tasks 3, 4, 7 concluídas!
-  
+
   📝 Sugestão de commit:
   ```bash
   git add .
   git commit -m "feat(api): Implement authentication and user management
-  
+
   - Task 3: Add user login endpoint
   - Task 4: Implement JWT token generation
   - Task 7: Add user registration
-  
+
   Tasks: 3, 4, 7"
   ```
-  
+
   📊 Mudanças detectadas:
   - 5 arquivos modificados
   - 120 linhas adicionadas, 8 removidas
@@ -125,8 +127,9 @@ alwaysApply: true
 - **Integração com Outras Regras:**
   - Seguir [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc) para formato de commit
   - Seguir [git_control.mdc](mdc:.cursor/rules/git_control.mdc) - NUNCA executar git, apenas sugerir
-  - Seguir [dev_workflow.mdc](mdc:.cursor/rules/taskmaster/dev_workflow.mdc) para workflow de desenvolvimento
-  - Usar ferramentas MCP do Taskmaster quando disponíveis
+  - Usar `./aitask` para gerenciar tasks do AI Task Manager
+  - Ver `AI_RULES.md` para regras de desenvolvimento com IA
+  - Ver `AITASK_USAGE.md` para documentação completa do AI Task Manager
 
 - **Casos Especiais:**
   - **Se task já está in-progress**: Não precisa marcar novamente, apenas continuar

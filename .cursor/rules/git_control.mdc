@@ -72,8 +72,7 @@ alwaysApply: true
 
 - **Integração com Outras Regras:**
   - [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc) - Sugerir commits, nunca executar
-  - [dev_workflow.mdc](mdc:.cursor/rules/taskmaster/dev_workflow.mdc) - Workflow não deve incluir execução automática de git
-  - [hamster.mdc](mdc:.cursor/rules/taskmaster/hamster.mdc) - Workflow Hamster não deve executar git
+  - Workflow do Rubinho Task Flow não deve incluir execução automática de git
 
 - **Princípio Fundamental:**
   > **O usuário tem controle total sobre o repositório Git. O AI pode executar qualquer comando do sistema sem perguntar, EXCETO comandos git. Para git, apenas sugere, analisa e informa. Nunca modifica o estado do git.**

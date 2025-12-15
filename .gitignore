@@ -9,9 +9,6 @@ dev-debug.log
 # Dependency directories
 node_modules/
 
-# Environment variables
-.env
-
 # Editor directories and files
 .idea
 .vscode
@@ -24,21 +21,9 @@ node_modules/
 # OS specific
 .DS_Store
 
-# Taskmaster - arquivos específicos de projeto (não devem estar no template)
-.taskmaster/tasks/
-.taskmaster/state.json
-.taskmaster/config.json
-.taskmaster/CLAUDE.md
-.taskmaster/docs/
-.taskmaster/reports/
-
-# Arquivos específicos de projeto (mantemos o template no repo)
+# Arquivos específicos de projeto
 .claude/settings.local.json
 
-# Configuração MCP local (não commitar, apenas o .example)
-.cursor/mcp.json
-.mcp.json
-
-# Task files
-tasks.json
-tasks/ 
+# Rubinho Task Flow - arquivos específicos de projeto
+.task-flow/tasks.json
+.task-flow/status.json

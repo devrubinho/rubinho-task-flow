@@ -123,8 +123,8 @@ alwaysApply: true
   - 45 linhas adicionadas, 12 removidas
   ```
 
-- **Integração com Taskmaster:**
-  - Após `set_task_status --id=<id> --status=done`, automaticamente:
+- **Integração com Rubinho Task Flow:**
+  - Após marcar uma task como concluída, automaticamente:
     1. Verificar se há mudanças no git
     2. Analisar arquivos modificados
     3. Gerar sugestão de commit baseada na task
@@ -137,6 +137,5 @@ alwaysApply: true
 
 - **Referências:**
   - Seguir padrões de [Conventional Commits](https://www.conventionalcommits.org/)
-  - Integrar com workflow do [dev_workflow.mdc](mdc:.cursor/rules/taskmaster/dev_workflow.mdc)
-  - Considerar contexto da task de [taskmaster.mdc](mdc:.cursor/rules/taskmaster/taskmaster.mdc)
+  - Integrar com workflow do Rubinho Task Flow
   - Controle git: [git_control.mdc](mdc:.cursor/rules/git_control.mdc)

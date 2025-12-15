@@ -1,0 +1,14 @@
+# Rubinho Task Flow - Task Definitions
+
+## How to use this file:
+
+1. Write your tasks below in natural language
+2. Use the format: `- [ ] Task description`
+3. Run `./rubinho-task-flow.sh` and select "Generate tasks"
+4. Use the menu to view status and manage your tasks
+
+## Tasks:
+
+- [ ] Create authentication system
+- [ ] Implement main dashboard
+- [ ] Add form validation
