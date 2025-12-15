@@ -33,7 +33,7 @@ pause() {
 while true; do
   show_header
   echo -e "${GREEN}📋 What do you want to do?${NC}\n"
-  echo -e "${BLUE}1.${NC} ${CYAN}Generate tasks from tasks.txt${NC}"
+  echo -e "${BLUE}1.${NC} ${CYAN}Generate tasks from .task-flow-tasks.txt${NC}"
   echo -e "${BLUE}2.${NC} ${CYAN}View all tasks status${NC}"
   echo -e "${BLUE}3.${NC} ${CYAN}View task details${NC}"
   echo -e "${BLUE}4.${NC} ${CYAN}Mark subtask as done${NC}"
@@ -46,8 +46,7 @@ while true; do
   case $choice in
     1)
       show_header
-      echo -e "${BLUE}🤖 Generating tasks...${NC}\n"
-      [ -f "$TASK_FLOW_DIR/scripts/generate.js" ] && node "$TASK_FLOW_DIR/scripts/generate.js" || echo -e "${RED}❌ Error: generate.js not found${NC}"
+      [ -x "$TASK_FLOW_DIR/scripts/generate.sh" ] && bash "$TASK_FLOW_DIR/scripts/generate.sh" || echo -e "${RED}❌ Error: generate.sh not found${NC}"
       pause
       ;;
 
@@ -76,10 +75,10 @@ while true; do
 
     5)
       show_header
-      TASKS_FILE="$TASK_FLOW_DIR/tasks.txt"
+      TASKS_FILE="$TASK_FLOW_DIR/.task-flow-tasks.txt"
 
       [ ! -f "$TASKS_FILE" ] && {
-        echo -e "${YELLOW}tasks.txt not found. Creating...${NC}\n"
+        echo -e "${YELLOW}.task-flow-tasks.txt not found. Creating...${NC}\n"
         cat > "$TASKS_FILE" << 'EOF'
 # Rubinho Task Flow - Task Definitions
 

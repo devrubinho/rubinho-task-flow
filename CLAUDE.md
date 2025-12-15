@@ -13,13 +13,13 @@ All development rules are automatically loaded from `.cursor/rules/` directory. 
 ## Rubinho Task Flow
 
 This project uses Rubinho Task Flow for task management:
-- **Task Definition**: Edit `.task-flow/tasks.txt` using format `- [ ] Task description`
-- **CLI**: Use `./rubinho-task-flow.sh` for all task management operations
+- **Task Definition**: Edit `.task-flow/.task-flow-tasks.txt` using format `- [ ] Task description`
+- **CLI**: Use `.task-flow/scripts/task-flow.sh` for all task management operations
 - **Interactive Menu**: The script provides an interactive menu with options to:
-  - Generate tasks from tasks.txt using AI
+  - Generate tasks from .task-flow-tasks.txt using AI
   - View task status and progress
   - View detailed task instructions
   - Mark subtasks as done
-  - Edit tasks.txt directly
+  - Edit .task-flow-tasks.txt directly
 
 Follow all rules defined in `.cursor/rules/` for consistent development practices.

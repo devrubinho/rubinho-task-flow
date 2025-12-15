@@ -46,7 +46,7 @@ git clone https://github.com/rubensdeoliveira/rubinho-task-flow.git ~/.rubinho-t
 
 # 3. Go to your project and run the task manager
 cd /path/to/your/project
-./rubinho-task-flow.sh
+.task-flow/scripts/task-flow.sh
 ```
 
 **That's it!** The interactive menu guides you through everything.
@@ -71,16 +71,16 @@ your-project/
 │   └── settings.json             # Claude Code settings
 │
 ├── .task-flow/                   # Rubinho Task Flow
-│   ├── tasks.txt                 # Plain text task definitions (edit this!)
+│   ├── .task-flow-tasks.txt       # Plain text task definitions (edit this!)
 │   └── scripts/                  # Management scripts (don't edit)
-│       ├── generate.js           # AI generation script
+│       ├── task-flow.sh          # Task Flow CLI
+│       ├── generate.sh           # Calls Claude Code to generate tasks
 │       ├── status.sh             # Status viewer
 │       ├── show.sh               # Task details viewer
 │       ├── done.sh               # Mark tasks as done
 │       ├── tasks.json            # Generated tasks (auto)
 │       └── status.json           # Task status tracking (auto)
 │
-├── rubinho-task-flow.sh          # Task Flow CLI
 └── .gitignore                    # Updated with discrete entries
 ```
 
@@ -99,7 +99,7 @@ No additional configuration required! Just make sure you have:
 Just run the script and navigate through the menu:
 
 ```bash
-./rubinho-task-flow.sh
+.task-flow/scripts/task-flow.sh
 ```
 
 O menu apresenta as seguintes opções:
@@ -110,11 +110,11 @@ O menu apresenta as seguintes opções:
 0. 🚪 **Sair**
 
 **Menu de Gerenciamento** (quando executado dentro de um projeto):
-1. 🤖 **Gerar tasks do arquivo tasks.txt** - AI transforma suas tasks em subtasks detalhadas
+1. 🤖 **Gerar tasks do arquivo .task-flow-tasks.txt** - AI transforma suas tasks em subtasks detalhadas
 2. 📊 **Ver status de todas as tasks** - Visualiza progresso geral
 3. 🔍 **Ver detalhes de uma task** - Mostra instruções detalhadas
 4. ✅ **Marcar subtask como concluída** - Atualiza progresso
-5. ✏️ **Editar tasks.txt** - Abre o editor para adicionar/modificar tasks
+5. ✏️ **Editar .task-flow-tasks.txt** - Abre o editor para adicionar/modificar tasks
 0. 🚪 **Sair**
 
 **Complete workflow:**
@@ -131,10 +131,10 @@ git clone https://github.com/rubensdeoliveira/rubinho-task-flow.git ~/.rubinho-t
 cd /path/to/my-project
 
 # 4. Run the task manager
-./rubinho-task-flow.sh
+.task-flow/scripts/task-flow.sh
 
 # 5. Use the menu options:
-#    - Option 5: Edit tasks.txt and add your tasks
+#    - Option 5: Edit .task-flow-tasks.txt and add your tasks
 #    - Option 1: Generate tasks with AI
 #    - Option 2: View status
 #    - Option 3: View task details
@@ -142,10 +142,9 @@ cd /path/to/my-project
 ```
 
 **Key features:**
-- ✅ **tasks.json** and **status.json** are automatically **gitignored**
+- ✅ **.task-flow/** directory is automatically **gitignored**
 - ✅ Your task progress stays **local and private**
 - ✅ Team members can use their own tasks without conflicts
-- ✅ **tasks.txt** can be committed (your choice) or gitignored
 - ✅ AI generates detailed, actionable subtasks from simple descriptions
 
 ### Cursor Integration
@@ -177,7 +176,7 @@ Included rules for:
 ### Rubinho Task Flow
 
 Simple yet powerful task management:
-- **Plain Text Input**: Write tasks in `.task-flow/tasks.txt` using simple format
+- **Plain Text Input**: Write tasks in `.task-flow/.task-flow-tasks.txt` using simple format
 - **AI-Powered Generation**: Transforms simple tasks into detailed, actionable subtasks
 - **Smart Instructions**: Each subtask includes context, objectives, implementation steps, and validation
 - **Simple Tracking**: JSON-based status management with easy CLI commands
@@ -189,16 +188,16 @@ The installer adds these entries to `.gitignore`:
 
 ```gitignore
 .claude/
-.cursor/rules/*.local.mdc
-.task-flow/scripts/tasks.json
-.task-flow/scripts/status.json
+.cursor/
+.task-flow/
+CLAUDE.md
 ```
 
 **Why discrete?**
 - No comments explaining what they are
 - No mention of "AI", "Claude", or "Anthropic"
-- Looks like standard project configs
-- Professional and clean appearance
+- Everything related to Rubinho Task Flow stays local
+- Clean git history without AI tooling files
 
 ## Updating Projects
 
@@ -215,7 +214,7 @@ The installer will:
 - ✅ Update .gitignore if needed
 - ✅ Update Task Flow scripts
 
-**Note**: The installer automatically adds `.task-flow/tasks.json` and `.task-flow/status.json` to `.gitignore`, keeping your task progress private and out of version control.
+**Note**: The installer automatically adds `.task-flow/` to `.gitignore`, keeping your task progress private and out of version control.
 
 ## Project Structure
 
@@ -231,9 +230,10 @@ rubinho-task-flow/
 │   └── settings.json             # Claude Code settings
 │
 ├── .task-flow/
-│   ├── tasks.txt                 # Task definitions template
+│   ├── .task-flow-tasks.txt      # Task definitions template
 │   └── scripts/                  # Management scripts
-│       ├── generate.js           # AI generation script
+│       ├── task-flow.sh          # Task Flow CLI (copied to projects)
+│       ├── generate.sh           # Calls Claude Code to generate tasks
 │       ├── status.sh             # Status viewer
 │       ├── show.sh               # Task details viewer
 │       ├── done.sh               # Mark tasks as done
@@ -243,7 +243,6 @@ rubinho-task-flow/
 ├── .gitignore                    # Template gitignore
 ├── CLAUDE.md                     # Main Claude instructions
 ├── install.sh                    # Installation script
-├── rubinho-task-flow.sh          # Task Flow CLI (copied to projects)
 └── README.md                     # This file
 ```
 
@@ -254,9 +253,9 @@ rubinho-task-flow/
 - 🔄 Installer **always overwrites** existing configs
 - 🤫 .gitignore entries are **discrete** (no AI mentions)
 - 🎯 Works with **Claude Code CLI** or **Cursor Pro**
-- 📦 Task progress files (`tasks.json`, `status.json`) are **automatically gitignored**
-- 📝 Define tasks in `.task-flow/tasks.txt` using simple format: `- [ ] Task description`
-- 🚀 Simple installation with `install.sh`, management with `rubinho-task-flow.sh`
+- 📦 Task Flow directory (`.task-flow/`) is **automatically gitignored**
+- 📝 Define tasks in `.task-flow/.task-flow-tasks.txt` using simple format: `- [ ] Task description`
+- 🚀 Simple installation with `install.sh`, management with `.task-flow/scripts/task-flow.sh`
 - 🔒 **No API keys needed** - uses Claude Code or Cursor Pro built-in AI
 
 ## Contributing

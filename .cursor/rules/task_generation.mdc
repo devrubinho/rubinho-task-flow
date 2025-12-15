@@ -1,0 +1,77 @@
+---
+description: Direct task generation from .task-flow-tasks.txt - be efficient and direct
+globs: .task-flow/.task-flow-tasks.txt, .task-flow/scripts/tasks.json, .task-flow/scripts/status.json
+alwaysApply: true
+---
+
+- **Task Generation - Direct and Efficient:**
+  - When user asks to "Read .task-flow-tasks.txt and generate detailed subtasks updating task status":
+    - **READ ONLY**: `.task-flow/.task-flow-tasks.txt`
+    - **GENERATE**: Two JSON files with the exact structure below
+    - **SAVE**: Both files to `.task-flow/scripts/`
+    - **DON'T**: Read other files, check existing JSONs, explore codebase, or ask questions
+
+- **Required Actions:**
+  1. Read `.task-flow-tasks.txt` (ignore comments, only process `- [ ]` lines)
+  2. For each task line, create a task with sequential ID starting at 1
+  3. Generate 3-8 subtasks per task with:
+     - Clear title
+     - Brief description
+     - Step-by-step instructions (3-5 steps)
+  4. Create `tasks.json` with structure below
+  5. Create `status.json` with all tasks/subtasks as "pending"
+  6. Write both files immediately
+
+- **tasks.json Structure:**
+  ```json
+  {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Task Title",
+        "description": "Task description",
+        "originalRequest": "- [ ] Task description from tasks.txt",
+        "createdAt": "ISO 8601 timestamp",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Subtask Title",
+            "description": "What this subtask does",
+            "instructions": "Step 1: Action\nStep 2: Action\nStep 3: Verify"
+          }
+        ]
+      }
+    ]
+  }
+  ```
+
+- **status.json Structure:**
+  ```json
+  {
+    "tasks": {
+      "1": {
+        "status": "pending",
+        "subtasks": {
+          "1": "pending",
+          "2": "pending"
+        }
+      }
+    }
+  }
+  ```
+
+- **Example:**
+  - Input (`.task-flow-tasks.txt`): `- [ ] Create authentication system`
+  - Output: Task with ID 1, 5 subtasks (setup database, create models, implement login, add JWT, test)
+
+- **Critical Rules:**
+  - ✅ Be direct: Read → Generate → Save
+  - ✅ No unnecessary file reads
+  - ✅ No exploration of codebase
+  - ✅ No questions - just generate
+  - ✅ Use current timestamp for `createdAt`
+  - ✅ All statuses start as "pending"
+  - ✅ Subtask IDs are sequential per task (1, 2, 3...)
+
+- **Principle:**
+  > **When generating tasks, be fast and direct. Read .task-flow-tasks.txt, generate JSONs with proper structure, save files. No exploration needed.**

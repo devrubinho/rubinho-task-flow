@@ -45,42 +45,56 @@ install_to_project() {
     cp -r "$SCRIPT_DIR/.cursor/rules/"* "$target/.cursor/rules/" &&
     echo -e "${GREEN}✅ Cursor rules${NC}"
 
-  [ -d "$SCRIPT_DIR/.claude" ] &&
-    cp -r "$SCRIPT_DIR/.claude/"* "$target/.claude/" 2>/dev/null &&
+  [ -f "$SCRIPT_DIR/.claude/settings.json" ] &&
+    cp "$SCRIPT_DIR/.claude/settings.json" "$target/.claude/settings.json" &&
     echo -e "${GREEN}✅ Claude settings${NC}"
+
+  [ -f "$SCRIPT_DIR/CLAUDE.md" ] &&
+    cp "$SCRIPT_DIR/CLAUDE.md" "$target/CLAUDE.md" &&
+    echo -e "${GREEN}✅ Claude instructions${NC}"
 
   if [ -d "$SCRIPT_DIR/.task-flow" ]; then
     mkdir -p "$target/.task-flow/scripts"
-    [ -d "$SCRIPT_DIR/.task-flow/scripts" ] &&
-      cp "$SCRIPT_DIR/.task-flow/scripts/"* "$target/.task-flow/scripts/" 2>/dev/null &&
+    [ -d "$SCRIPT_DIR/.task-flow/scripts" ] && {
+      cp "$SCRIPT_DIR/.task-flow/scripts/"* "$target/.task-flow/scripts/" 2>/dev/null
       chmod +x "$target/.task-flow/scripts/"*.sh 2>/dev/null
-    [ ! -f "$target/.task-flow/tasks.txt" ] &&
-      [ -f "$SCRIPT_DIR/.task-flow/tasks.txt" ] &&
-      cp "$SCRIPT_DIR/.task-flow/tasks.txt" "$target/.task-flow/tasks.txt"
+    }
+    [ ! -f "$target/.task-flow/.task-flow-tasks.txt" ] &&
+      [ -f "$SCRIPT_DIR/.task-flow/.task-flow-tasks.txt" ] &&
+      cp "$SCRIPT_DIR/.task-flow/.task-flow-tasks.txt" "$target/.task-flow/.task-flow-tasks.txt"
     echo -e "${GREEN}✅ Task Flow scripts${NC}"
   fi
 
-  cp "$SCRIPT_DIR/rubinho-task-flow.sh" "$target/rubinho-task-flow.sh"
-  chmod +x "$target/rubinho-task-flow.sh"
-  echo -e "${GREEN}✅ CLI${NC}"
-
   [ ! -f "$target/.gitignore" ] && touch "$target/.gitignore"
 
-  if ! grep -q "^\.task-flow/scripts/tasks\.json$" "$target/.gitignore" 2>/dev/null; then
-    cat >> "$target/.gitignore" << 'EOF'
+  # Remove old entries if they exist
+  sed -i.bak '/^\.claude\/$/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^\.cursor\/$/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^\.task-flow\/$/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^CLAUDE\.md$/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^# Rubinho Task Flow/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^\.cursor\/rules\/$/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^\.task-flow\/scripts\/tasks\.json$/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^\.task-flow\/scripts\/status\.json$/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^\.cursor\/rules\/\*\.local\.mdc$/d' "$target/.gitignore" 2>/dev/null
+  sed -i.bak '/^rubinho-task-flow\.sh$/d' "$target/.gitignore" 2>/dev/null
+  rm -f "$target/.gitignore.bak" 2>/dev/null
 
-.claude/
-.cursor/rules/*.local.mdc
-.task-flow/scripts/tasks.json
-.task-flow/scripts/status.json
-EOF
-    echo -e "${GREEN}✅ .gitignore${NC}"
-  fi
+  # Add entries without comments
+  {
+    echo ""
+    echo ".claude/"
+    echo ".cursor/"
+    echo ".task-flow/"
+    echo "CLAUDE.md"
+  } >> "$target/.gitignore"
+
+  echo -e "${GREEN}✅ .gitignore updated${NC}"
 
   echo -e "\n${GREEN}✨ Done!${NC}\n"
   echo -e "${BLUE}Next steps:${NC}"
   echo -e "   ${YELLOW}cd $target${NC}"
-  echo -e "   ${YELLOW}./rubinho-task-flow.sh${NC}\n"
+  echo -e "   ${YELLOW}.task-flow/scripts/task-flow.sh${NC}\n"
 }
 
 main() {
