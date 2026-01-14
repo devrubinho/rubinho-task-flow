@@ -7,8 +7,16 @@
 3. Use `task-flow: sync` to generate subtasks from your tasks
 4. Use `task-flow: status` to view task progress
 
+## Screenshots:
+
+- Adicione seus screenshots na pasta `.task-flow/screens/` (PNG ou JPG)
+- O RBIN Task Flow automaticamente detecta e referencia os screenshots disponíveis ao gerar subtasks
+- Para referenciar um screenshot específico em uma task, use: `task-flow-screen nome_do_arquivo.png`
+- Exemplo: `- Criar tela de login task-flow-screen login.png`
+
 ## Tasks:
 
-- First task
-- Second task
-
+- Criar sistema de autenticação (login, registro, recuperação de senha)
+- Implementar dashboard com métricas principais
+- CRUD completo de usuários
+- Sistema de notificações

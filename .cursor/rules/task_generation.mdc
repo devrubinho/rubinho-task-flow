@@ -6,22 +6,36 @@ alwaysApply: true
 
 - **Task Generation - Direct and Efficient:**
   - When user asks to "Read tasks.input.txt and generate detailed subtasks updating task status":
-    - **READ ONLY**: `.task-flow/tasks.input.txt`
+    - **READ**: `.task-flow/tasks.input.txt` (only process lines starting with `- `)
+    - **READ**: `.task-flow/screens/` directory to list available screenshots (ALWAYS check this directory)
     - **GENERATE**: Two JSON files and one markdown file with the exact structure below
     - **SAVE**: All files to `.task-flow/`
-    - **DON'T**: Read other files, check existing JSONs, explore codebase, or ask questions
+    - **DON'T**: Check existing JSONs, explore codebase, or ask questions
+
+- **Screenshot Reference System:**
+  - **AUTOMATIC**: Always check `.task-flow/screens/` directory for available screenshots (PNG, JPG files)
+  - **NO LISTING NEEDED**: Don't require screenshots to be listed in tasks.input.txt - always scan the directory
+  - **AUTOMATIC MATCHING**: Automatically match screenshots to tasks based on keywords (e.g., "login" → `login_recover_signup.png`, "dashboard" → `dashboard.png`, "paciente" → `patient.png`)
+  - **SPECIFIC REFERENCE**: If task contains `task-flow-screen nome_do_arquivo.png`, reference that specific screenshot from `.task-flow/screens/`
+  - **PATH ALWAYS**: `task-flow-screen` always references files in `.task-flow/screens/` directory
+  - **INCLUDE**: Add screenshot reference in instructions: "Referência visual: `.task-flow/screens/nome_do_arquivo.png`"
 
 - **Required Actions:**
-  1. Read `tasks.input.txt` (ignore comments, only process lines starting with `- `)
-  2. For each task line, create a task with sequential ID starting at 1
-  3. Generate 3-8 subtasks per task with:
+  1. Read `tasks.input.txt`:
+     - Process task lines (only process lines starting with `- `)
+     - Check for `task-flow-screen nome_do_arquivo.png` markers in task descriptions
+  2. **ALWAYS** list available screenshots from `.task-flow/screens/` directory (PNG, JPG files)
+  3. For each task line, create a task with sequential ID starting at 1
+  4. Generate 3-8 subtasks per task with:
      - Clear title
      - Brief description
      - Step-by-step instructions (3-5 steps)
-  4. Create `.task-flow/.internal/tasks.json` with structure below
-  5. Create `.task-flow/.internal/status.json` with all tasks/subtasks as "pending"
-  6. Create `.task-flow/tasks.status.md` with all tasks and subtasks marked as `- [ ]` (pending)
-  7. Write all three files immediately
+     - **AUTOMATIC**: Include relevant screenshot references when applicable (match by keywords)
+     - **SPECIFIC**: If task has `task-flow-screen nome_do_arquivo.png`, reference that specific screenshot from `.task-flow/screens/`
+  5. Create `.task-flow/.internal/tasks.json` with structure below
+  6. Create `.task-flow/.internal/status.json` with all tasks/subtasks as "pending"
+  7. Create `.task-flow/tasks.status.md` with all tasks and subtasks marked as `- [ ]` (pending)
+  8. Write all three files immediately
 
 - **tasks.json Structure:**
   ```json
@@ -103,12 +117,26 @@ alwaysApply: true
 
 - **Example:**
   - Input (`tasks.input.txt`): `- Create authentication system`
-  - Output: Task with ID 1, 5 subtasks (setup database, create models, implement login, add JWT, test)
+  - Screenshots available: `login_recover_signup.png`
+  - Output: Task with ID 1, 5 subtasks with screenshot references:
+    - Subtask 1: "Setup database schema" (no screenshot)
+    - Subtask 2: "Create login form" → Instructions include: "Referência visual: `.task-flow/screens/login_recover_signup.png`"
+    - Subtask 3: "Implement registration" → Instructions include screenshot reference
+    - Subtask 4: "Add JWT authentication" (no screenshot)
+    - Subtask 5: "Test authentication flow" → Instructions include screenshot reference
+  
+- **Screenshot Reference Examples:**
+  - Task: `- Sistema de autenticação do dentista` → Automatically matches and references `login_recover_signup.png` from `.task-flow/screens/`
+  - Task: `- Dashboard básico com estrutura task-flow-screen dashboard.png` → References specific `.task-flow/screens/dashboard.png`
+  - Task: `- CRUD completo de pacientes` → Automatically matches and references `patient.png` and `patient_profile.png` from `.task-flow/screens/` if available
+  - **IMPORTANT**: `task-flow-screen` always references files in `.task-flow/screens/` - no need to specify full path
 
 - **Critical Rules:**
   - ✅ Be direct: Read → Generate → Save
-  - ✅ No unnecessary file reads
-  - ✅ No exploration of codebase
+  - ✅ **ALWAYS** check `.task-flow/screens/` directory for available screenshots (automatic, no need to list in tasks.input.txt)
+  - ✅ Automatically match and reference relevant screenshots in subtask instructions based on keywords
+  - ✅ Support `task-flow-screen nome_do_arquivo.png` format - always references `.task-flow/screens/nome_do_arquivo.png`
+  - ✅ No exploration of codebase beyond screenshots directory
   - ✅ No questions - just generate
   - ✅ Use current timestamp for `createdAt`
   - ✅ All statuses start as "pending"

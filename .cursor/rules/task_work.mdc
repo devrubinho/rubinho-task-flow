@@ -56,6 +56,8 @@ alwaysApply: true
      - Skip "done" and "in_progress" subtasks
   3. **For each subtask**:
      - Read full instructions from `tasks.json`
+     - **CHECK**: If instructions mention screenshot references (`.task-flow/screens/...`), verify screenshot exists
+     - **REFERENCE**: Use screenshots as visual reference when implementing UI-related subtasks
      - Implement following step-by-step instructions
      - Test/verify implementation
      - Update `status.json` to mark as "done"
@@ -83,6 +85,8 @@ alwaysApply: true
      - Skip "done" and "in_progress" subtasks
   4. **For each subtask** (only if dependency check passed):
      - Read full instructions from `tasks.json`
+     - **CHECK**: If instructions mention screenshot references (`.task-flow/screens/...`), verify screenshot exists
+     - **REFERENCE**: Use screenshots as visual reference when implementing UI-related subtasks
      - Implement following step-by-step instructions
      - Test/verify implementation
      - Update `status.json` to mark as "done"
@@ -196,8 +200,15 @@ alwaysApply: true
   - If file doesn't exist → create it
   - If instructions unclear → ask for clarification (but try to infer first)
 
+- **Screenshot Support:**
+  - **AUTOMATIC**: When implementing subtasks, check if instructions reference screenshots
+  - **REFERENCE**: Use screenshots from `.task-flow/screens/` as visual reference for UI implementation
+  - **MATCHING**: Match screenshot references mentioned in subtask instructions
+  - **NO NEED**: User doesn't need to explicitly mention screenshots - they're automatically considered
+
 - **Integration:**
   - Works with [task_execution.mdc](mdc:.cursor/rules/task_execution.mdc) - same workflow
+  - Follows [task_generation.mdc](mdc:.cursor/rules/task_generation.mdc) - screenshots are automatically referenced in generated subtasks
   - Follows [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc) - suggest commit after completion
   - Respects [git_control.mdc](mdc:.cursor/rules/git_control.mdc) - never commit automatically
 
