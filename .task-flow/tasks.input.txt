@@ -16,7 +16,5 @@
 
 ## Tasks:
 
-- Criar sistema de autenticação (login, registro, recuperação de senha)
-- Implementar dashboard com métricas principais
-- CRUD completo de usuários
-- Sistema de notificações
+- First task
+- Second task
