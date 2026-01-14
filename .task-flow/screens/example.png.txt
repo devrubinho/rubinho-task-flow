@@ -20,5 +20,5 @@ Este é um arquivo placeholder. Substitua este arquivo por um screenshot real (P
 ## Referenciar em tasks:
 
 Para referenciar um screenshot específico em uma task, use:
-`task-flow-screen: nome_do_arquivo.png`
+`task-flow-screen nome_do_arquivo.png`
 
