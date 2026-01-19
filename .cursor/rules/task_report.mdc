@@ -1,0 +1,108 @@
+---
+description: Generate implementation reports for completed tasks
+globs: **/*
+alwaysApply: true
+---
+
+- **Task Report - Generate Implementation Reports:**
+  - **FAST FORMAT**: `task-flow: report task X` → Generate implementation report for task X
+  - When user says "task-flow: report task X", "generate report for task X", or "create report task X":
+    - **READ**: `.task-flow/.internal/tasks.json` to get task details
+    - **READ**: `.task-flow/.internal/status.json` to verify task is completed
+    - **ANALYZE**: Codebase changes related to the task (git history, file changes)
+    - **GENERATE**: Markdown report documenting what was implemented
+    - **SAVE**: Report to `.task-flow/docs/task-X-implementation.md`
+
+- **Report Generation Rules:**
+  1. **Verify Completion**: Task must be marked as "done" in status.json (all subtasks completed)
+  2. **Report Structure**:
+     - Task title and description
+     - List of all subtasks with their status
+     - Implementation details (files created/modified)
+     - Code changes summary
+     - Testing information (if applicable)
+     - Notes and considerations
+  3. **File Location**: `.task-flow/docs/task-X-implementation.md`
+  4. **File Naming**: `task-{taskId}-implementation.md` (e.g., `task-1-implementation.md`)
+  5. **Directory Creation**: Create `.task-flow/docs/` if it doesn't exist
+
+- **Report Template:**
+  ```markdown
+  # Task {X}: {Task Title}
+  
+  **Status**: ✅ Completed
+  **Date**: {completion date}
+  
+  ## Description
+  
+  {Task description from tasks.json}
+  
+  ## Subtasks Completed
+  
+  {List all subtasks with their status}
+  
+  ## Implementation Details
+  
+  ### Files Created
+  - {file path}
+  - {file path}
+  
+  ### Files Modified
+  - {file path}
+  - {file path}
+  
+  ## Code Changes Summary
+  
+  {Summary of what was implemented}
+  
+  ## Testing
+  
+  {Testing information if applicable}
+  
+  ## Notes
+  
+  {Additional notes or considerations}
+  ```
+
+- **Report Content:**
+  1. **Task Information**: Title, description, completion date
+  2. **Subtasks**: List all subtasks with their completion status
+  3. **Files**: List files created and modified (from git history or file system)
+  4. **Implementation**: Summary of what was implemented
+  5. **Testing**: Testing information if tests were added
+  6. **Notes**: Additional considerations or follow-up items
+
+- **Natural Language Phrases:**
+  - **FAST FORMAT**: `task-flow: report task X` or `task-flow report task X`
+  - "generate report for task X"
+  - "create report task X"
+  - "document task X"
+  - "report for task X"
+  - Any variation asking for task report generation
+
+- **Example:**
+  ```
+  User: "task-flow: report task 1"
+  
+  AI Action:
+  1. Read tasks.json and status.json
+  2. Verify task 1 is completed
+  3. Analyze codebase for changes related to task 1
+  4. Generate markdown report
+  5. Save to .task-flow/docs/task-1-implementation.md
+  6. Show confirmation message
+  ```
+
+- **Error Handling:**
+  - If task is not completed: Show warning and ask if user wants to generate partial report
+  - If task doesn't exist: Show error message
+  - If docs directory doesn't exist: Create it automatically
+
+- **Integration:**
+  - Works with [task_execution.mdc](mdc:.cursor/rules/task_execution.mdc) workflow
+  - Uses task data from `.task-flow/.internal/tasks.json` and `.task-flow/.internal/status.json`
+  - Reports are stored in `.task-flow/docs/` directory
+  - Can reference git history for implementation details
+
+- **Principle:**
+  > **Generate comprehensive implementation reports documenting what was completed in each task. Reports should be useful for code reviews, documentation, and project tracking.**

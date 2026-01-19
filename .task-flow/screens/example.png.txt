@@ -1,14 +1,14 @@
-# Screenshot de Exemplo
+# Example Screenshot
 
-Este é um arquivo placeholder. Substitua este arquivo por um screenshot real (PNG ou JPG).
+This is a placeholder file. Replace this file with a real screenshot (PNG or JPG).
 
-## Como adicionar screenshots:
+## How to add screenshots:
 
-1. Adicione seus arquivos de imagem (.png ou .jpg) nesta pasta
-2. Use nomes descritivos em kebab-case
-3. O RBIN Task Flow automaticamente detectará e referenciará os screenshots
+1. Add your image files (.png or .jpg) to this folder
+2. Use descriptive names in kebab-case
+3. RBIN Task Flow will automatically detect and reference the screenshots
 
-## Exemplos de nomes:
+## Example names:
 
 - `login_recover_signup.png`
 - `dashboard.png`
@@ -17,8 +17,7 @@ Este é um arquivo placeholder. Substitua este arquivo por um screenshot real (P
 - `prescriptions.png`
 - `medicine.png`
 
-## Referenciar em tasks:
+## Reference in tasks:
 
-Para referenciar um screenshot específico em uma task, use:
-`task-flow-screen nome_do_arquivo.png`
-
+To reference a specific screenshot in a task, use:
+`task-flow-screen filename.png`

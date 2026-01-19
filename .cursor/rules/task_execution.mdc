@@ -25,6 +25,8 @@ alwaysApply: true
   - `task-flow: status` - Show current task status
   - `task-flow: review` - Review completed tasks
   - `task-flow: refactor` - Refactor code from current commit
+  - `task-flow: estimate task X` - Estimate time for task X based on subtasks and experience level
+  - `task-flow: report task X` - Generate implementation report for completed task X
 
 - **Workflow Example:**
   ```markdown
@@ -80,7 +82,7 @@ alwaysApply: true
 
 - **Simplified Task Work:**
   - See [task_work.mdc](mdc:.cursor/rules/task_work.mdc) for simplified "do next X subtasks" commands
-  - When user says "faça as próximas X subtasks", automatically find and implement them
+  - When user says "work on next X subtasks" or similar phrases, automatically find and implement them
 
 - **Task Review:**
   - See [task_review.mdc](mdc:.cursor/rules/task_review.mdc) for reviewing completed tasks
@@ -93,10 +95,10 @@ alwaysApply: true
 - **Task Flow Commands - Natural Language Interpretation:**
   - **CRITICAL**: When user mentions **"task flow"**, they **ALWAYS** refer to **RBIN Task Flow**
   - Common phrases that mean "work on RBIN Task Flow subtasks":
-    - "trabalhe nas próximas x subtasks do task flow"
     - "work on next x subtasks from task flow"
-    - "próximas subtasks do task flow"
+    - "next subtasks from task flow"
     - "task flow subtasks"
+    - "do next x subtasks"
     - Any variation mentioning "task flow" + "subtasks"
 
 - **When User Asks to Work on Subtasks:**
@@ -112,7 +114,7 @@ alwaysApply: true
   - **STEP 4**: If all subtasks of a task are done, update task status to "done" in both files
 
 - **Example:**
-  - User: "trabalhe nas próximas 3 subtasks do task flow"
+  - User: "work on next 3 subtasks from task flow"
   - Interpretation: Work on next 3 pending subtasks from RBIN Task Flow
   - Action:
     1. Read `.task-flow/.internal/tasks.json` and `.task-flow/.internal/status.json`

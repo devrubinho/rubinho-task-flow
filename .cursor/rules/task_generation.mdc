@@ -18,7 +18,7 @@ alwaysApply: true
   - **AUTOMATIC MATCHING**: Automatically match screenshots to tasks based on keywords (e.g., "login" → `login_recover_signup.png`, "dashboard" → `dashboard.png`, "paciente" → `patient.png`)
   - **SPECIFIC REFERENCE**: If task contains `task-flow-screen nome_do_arquivo.png`, reference that specific screenshot from `.task-flow/screens/`
   - **PATH ALWAYS**: `task-flow-screen` always references files in `.task-flow/screens/` directory
-  - **INCLUDE**: Add screenshot reference in instructions: "Referência visual: `.task-flow/screens/nome_do_arquivo.png`"
+  - **INCLUDE**: Add screenshot reference in instructions: "Visual reference: `.task-flow/screens/filename.png`"
 
 - **Required Actions:**
   1. Read `tasks.input.txt`:
@@ -79,17 +79,17 @@ alwaysApply: true
   ```markdown
   # Task Status
 
-  <!-- ⚠️ AVISO: Este arquivo é atualizado automaticamente pela IA. NÃO edite manualmente. -->
+  <!-- ⚠️ WARNING: This file is automatically updated by AI. DO NOT edit manually. -->
 
-  ## 📊 Resumo
+  ## 📊 Summary
 
-  - ✅ **Tasks Completas**: 0
-  - ⏳ **Tasks em Andamento**: 2
-  - 📝 **Subtasks Restantes**: 8
+  - ✅ **Completed Tasks**: 0
+  - ⏳ **Tasks in Progress**: 2
+  - 📝 **Remaining Subtasks**: 8
 
   **Tasks:**
-  - ✅ Task 1: First task (completa)
-  - ⏳ Task 2: Second task (3 subtasks restantes de 5)
+  - ✅ Task 1: First task (complete)
+  - ⏳ Task 2: Second task (3 remaining subtasks out of 5)
 
   ---
 
@@ -107,10 +107,10 @@ alwaysApply: true
     - [ ] Subtask Title 3
   ```
   - **ALWAYS include summary section** at the top with:
-    - ✅ Tasks completas (all subtasks done)
-    - ⏳ Tasks em andamento (some subtasks done)
-    - 📝 Total de subtasks restantes
-    - Lista de tasks com status e quantas subtasks faltam
+    - ✅ Completed tasks (all subtasks done)
+    - ⏳ Tasks in progress (some subtasks done)
+    - 📝 Total remaining subtasks
+    - List of tasks with status and how many subtasks remain
   - All tasks and subtasks start as `- [ ]` (pending)
   - Format: Task title with `- [ ]` or `- [x]`, then subtasks indented with `  - [ ]` or `  - [x]`
   - **CRITICAL**: Always regenerate summary when updating tasks.status.md
@@ -120,15 +120,15 @@ alwaysApply: true
   - Screenshots available: `login_recover_signup.png`
   - Output: Task with ID 1, 5 subtasks with screenshot references:
     - Subtask 1: "Setup database schema" (no screenshot)
-    - Subtask 2: "Create login form" → Instructions include: "Referência visual: `.task-flow/screens/login_recover_signup.png`"
+    - Subtask 2: "Create login form" → Instructions include: "Visual reference: `.task-flow/screens/login_recover_signup.png`"
     - Subtask 3: "Implement registration" → Instructions include screenshot reference
     - Subtask 4: "Add JWT authentication" (no screenshot)
     - Subtask 5: "Test authentication flow" → Instructions include screenshot reference
   
 - **Screenshot Reference Examples:**
-  - Task: `- Sistema de autenticação do dentista` → Automatically matches and references `login_recover_signup.png` from `.task-flow/screens/`
-  - Task: `- Dashboard básico com estrutura task-flow-screen dashboard.png` → References specific `.task-flow/screens/dashboard.png`
-  - Task: `- CRUD completo de pacientes` → Automatically matches and references `patient.png` and `patient_profile.png` from `.task-flow/screens/` if available
+  - Task: `- Dentist authentication system` → Automatically matches and references `login_recover_signup.png` from `.task-flow/screens/`
+  - Task: `- Basic dashboard with structure task-flow-screen dashboard.png` → References specific `.task-flow/screens/dashboard.png`
+  - Task: `- Complete patient CRUD` → Automatically matches and references `patient.png` and `patient_profile.png` from `.task-flow/screens/` if available
   - **IMPORTANT**: `task-flow-screen` always references files in `.task-flow/screens/` - no need to specify full path
 
 - **Critical Rules:**

@@ -91,7 +91,15 @@ check_model_updates() {
   fi
 
   if [ -f "$SCRIPT_DIR/.gemini/settings.json" ]; then
-    local installed=$(grep -o '"model": "[^"]*"' "$SCRIPT_DIR/.gemini/settings.json" | cut -d'"' -f4)
+    local installed=""
+    if command -v jq >/dev/null 2>&1; then
+      installed=$(jq -r 'if .model | type == "string" then .model else .model.name // "" end' "$SCRIPT_DIR/.gemini/settings.json" 2>/dev/null)
+    else
+      installed=$(grep -o '"name": "[^"]*"' "$SCRIPT_DIR/.gemini/settings.json" | cut -d'"' -f4)
+      if [ -z "$installed" ]; then
+        installed=$(grep -o '"model": "[^"]*"' "$SCRIPT_DIR/.gemini/settings.json" | cut -d'"' -f4)
+      fi
+    fi
     if [ -n "$installed" ] && [ -n "$gemini_latest" ] && [ "$installed" != "$gemini_latest" ]; then
       echo ""
       echo -e "${YELLOW}⚠️  Gemini: New version available${NC}"
@@ -101,9 +109,23 @@ check_model_updates() {
       if [[ "$response" =~ ^[yY]$ ]]; then
         local settings_file="$SCRIPT_DIR/.gemini/settings.json"
         mkdir -p "$(dirname "$settings_file")"
-        printf '{\n  "model": "%s"\n}\n' "$gemini_latest" > "$settings_file"
+        if command -v jq >/dev/null 2>&1; then
+          local is_object=$(jq -r 'if .model | type == "object" then "true" else "false" end' "$settings_file" 2>/dev/null || echo "false")
+          if [ "$is_object" = "true" ]; then
+            jq ".model.name = \"$gemini_latest\"" "$settings_file" > "$settings_file.tmp" && mv "$settings_file.tmp" "$settings_file"
+          else
+            printf '{\n  "model": {\n    "name": "%s"\n  }\n}\n' "$gemini_latest" > "$settings_file"
+          fi
+        else
+          printf '{\n  "model": {\n    "name": "%s"\n  }\n}\n' "$gemini_latest" > "$settings_file"
+        fi
         if [ -f "$settings_file" ]; then
-          local verify=$(grep -o '"model": "[^"]*"' "$settings_file" | cut -d'"' -f4)
+          local verify=""
+          if command -v jq >/dev/null 2>&1; then
+            verify=$(jq -r 'if .model | type == "string" then .model else .model.name // "" end' "$settings_file" 2>/dev/null)
+          else
+            verify=$(grep -o '"name": "[^"]*"' "$settings_file" | cut -d'"' -f4)
+          fi
           if [ "$verify" = "$gemini_latest" ]; then
             echo -e "${GREEN}✅ Gemini template updated to ${gemini_latest}${NC}"
             echo -e "${CYAN}   (Repository template updated - run install.sh on projects to apply)${NC}"
@@ -145,9 +167,18 @@ show_model_versions() {
   fi
 
   if [ -f "$target/.gemini/settings.json" ]; then
-    local gemini_model=$(grep -o '"model": "[^"]*"' "$target/.gemini/settings.json" | cut -d'"' -f4)
-    if [ -n "$gemini_model" ]; then
+    if command -v jq >/dev/null 2>&1; then
+      local gemini_model=$(jq -r 'if .model | type == "string" then .model else .model.name // "Default (recommended)" end' "$target/.gemini/settings.json" 2>/dev/null)
+    else
+      local gemini_model=$(grep -o '"name": "[^"]*"' "$target/.gemini/settings.json" | cut -d'"' -f4)
+      if [ -z "$gemini_model" ]; then
+        local gemini_model=$(grep -o '"model": "[^"]*"' "$target/.gemini/settings.json" | cut -d'"' -f4)
+      fi
+    fi
+    if [ -n "$gemini_model" ] && [ "$gemini_model" != "null" ]; then
       echo -e "${BLUE}Gemini:${NC} ${YELLOW}$gemini_model${NC}"
+    else
+      echo -e "${BLUE}Gemini:${NC} ${YELLOW}Default (recommended)${NC}"
     fi
   fi
 
@@ -216,6 +247,10 @@ install_to_project() {
     [ -f "$SCRIPT_DIR/.task-flow/README.md" ] &&
       cp "$SCRIPT_DIR/.task-flow/README.md" "$target/.task-flow/README.md" &&
       echo -e "${GREEN}✅ Task Flow README${NC}"
+    mkdir -p "$target/.task-flow/screens" &&
+      echo -e "${GREEN}✅ Screenshots directory (.task-flow/screens/)${NC}"
+    mkdir -p "$target/.task-flow/docs" &&
+      echo -e "${GREEN}✅ Documentation directory (.task-flow/docs/)${NC}"
   fi
 
   [ ! -f "$target/.gitignore" ] && touch "$target/.gitignore"

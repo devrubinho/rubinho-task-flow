@@ -1,30 +1,30 @@
 ---
-description: Práticas de commit após conclusão de tarefas e subtarefas, incluindo sugestões automáticas de mensagens
+description: Commit practices after task and subtask completion, including automatic message suggestions
 globs: **/*
 alwaysApply: true
 ---
 
-- **Notificação e Sugestão de Commit Após Tarefas:**
-  - **Sempre avisar o usuário** quando uma task ou subtask for marcada como `done`
-  - **Sugerir uma mensagem de commit** baseada nas mudanças realizadas
-  - **Incluir contexto** da task/subtask na sugestão de commit
-  - **CRÍTICO: NUNCA executar comandos git** - apenas sugerir, o usuário executa
+- **Notification and Commit Suggestion After Tasks:**
+  - **Always notify user** when a task or subtask is marked as `done`
+  - **Suggest a commit message** based on changes made
+  - **Include context** of task/subtask in commit suggestion
+  - **CRITICAL: NEVER execute git commands** - only suggest, user executes
 
-- **Quando Aplicar:**
-  - Após `set_task_status` com status `done` para qualquer task ou subtask
-  - Após implementação completa de uma subtask
-  - Após conclusão de uma task pai (quando todas subtasks estiverem done)
+- **When to Apply:**
+  - After `set_task_status` with status `done` for any task or subtask
+  - After complete implementation of a subtask
+  - After completion of a parent task (when all subtasks are done)
 
-- **Formato da Sugestão de Commit:**
+- **Commit Suggestion Format:**
   ```bash
-  # ✅ DO: Formato recomendado
-  git commit -m "feat(module): Descrição curta da mudança
+  # ✅ DO: Recommended format
+  git commit -m "feat(module): Short description of change
   
-  - Detalhes da implementação
+  - Implementation details
   - Task/Subtask ID: X.Y
-  - Mudanças principais realizadas"
+  - Main changes made"
   
-  # Exemplo real:
+  # Real example:
   git commit -m "feat(auth): Implement user login validation
   
   - Add email format validation
@@ -32,34 +32,34 @@ alwaysApply: true
   - Task ID: 3.2"
   ```
 
-- **Processo de Sugestão:**
-  1. **Analisar mudanças**: Usar `git status` e `git diff` para identificar arquivos modificados (apenas leitura, nunca modificar)
-  2. **Extrair contexto da task**: Incluir ID da task/subtask e título/descrição
-  3. **Gerar mensagem**: Criar mensagem seguindo conventional commits
-  4. **Apresentar ao usuário**: Mostrar sugestão formatada e pronta para uso
-  5. **NUNCA executar**: Apenas sugerir, o usuário decide quando e como fazer o commit
+- **Suggestion Process:**
+  1. **Analyze changes**: Use `git status` and `git diff` to identify modified files (read-only, never modify)
+  2. **Extract task context**: Include task/subtask ID and title/description
+  3. **Generate message**: Create message following conventional commits
+  4. **Present to user**: Show formatted suggestion ready to use
+  5. **NEVER execute**: Only suggest, user decides when and how to commit
 
-- **Tipos de Commit (Conventional Commits):**
-  - `feat`: Nova funcionalidade (task completa)
-  - `fix`: Correção de bug
-  - `refactor`: Refatoração sem mudança de comportamento
-  - `docs`: Mudanças em documentação
-  - `style`: Formatação, ponto e vírgula, etc (sem mudança de código)
-  - `test`: Adição ou correção de testes
-  - `chore`: Mudanças em build, dependências, etc
+- **Commit Types (Conventional Commits):**
+  - `feat`: New feature (complete task)
+  - `fix`: Bug fix
+  - `refactor`: Refactoring without behavior change
+  - `docs`: Documentation changes
+  - `style`: Formatting, semicolons, etc (no code change)
+  - `test`: Test addition or fix
+  - `chore`: Build, dependency changes, etc
 
-- **Estrutura da Mensagem Sugerida:**
+- **Suggested Message Structure:**
   ```bash
-  <tipo>(<escopo>): <descrição curta>
+  <type>(<scope>): <short description>
   
-  <corpo opcional com detalhes>
+  <optional body with details>
   - Task/Subtask: <ID>
-  - Arquivos modificados: <lista resumida>
+  - Modified files: <summary list>
   ```
 
-- **Exemplos de Sugestões:**
+- **Suggestion Examples:**
   
-  **Para subtask de implementação:**
+  **For implementation subtask:**
   ```bash
   git commit -m "feat(api): Add user authentication endpoint
   
@@ -69,7 +69,7 @@ alwaysApply: true
   - Subtask ID: 5.3"
   ```
   
-  **Para task completa:**
+  **For complete task:**
   ```bash
   git commit -m "feat(dashboard): Complete user analytics dashboard
   
@@ -79,7 +79,7 @@ alwaysApply: true
   - Task ID: 7"
   ```
   
-  **Para correção:**
+  **For fix:**
   ```bash
   git commit -m "fix(auth): Resolve token expiration issue
   
@@ -88,54 +88,54 @@ alwaysApply: true
   - Subtask ID: 8.1"
   ```
 
-- **Comandos Úteis para Análise:**
-  - `git status --short` - Lista arquivos modificados de forma compacta
-  - `git diff --stat` - Estatísticas de mudanças
-  - `git diff --name-only` - Apenas nomes dos arquivos modificados
-  - `git log --oneline -5` - Últimos commits para contexto
+- **Useful Commands for Analysis:**
+  - `git status --short` - List modified files compactly
+  - `git diff --stat` - Change statistics
+  - `git diff --name-only` - Only names of modified files
+  - `git log --oneline -5` - Last commits for context
 
-- **Quando NÃO Sugerir Commit:**
-  - ❌ DON'T: Se não houver mudanças no git (nenhum arquivo modificado)
-  - ❌ DON'T: Se o usuário já fez commit recentemente (últimos 5 minutos)
-  - ❌ DON'T: Se houver conflitos de merge não resolvidos
-  - ❌ DON'T: Se o repositório não for um git repo
+- **When NOT to Suggest Commit:**
+  - ❌ DON'T: If there are no git changes (no modified files)
+  - ❌ DON'T: If user already committed recently (last 5 minutes)
+  - ❌ DON'T: If there are unresolved merge conflicts
+  - ❌ DON'T: If repository is not a git repo
 
-- **Apresentação da Sugestão:**
-  - **Sempre notificar o usuário** quando uma task/subtask for concluída com mensagem clara e emoji ✅
-  - **Mostrar sugestão formatada** pronta para copiar/colar
-  - **Incluir estatísticas** das mudanças (arquivos modificados, linhas adicionadas/removidas)
+- **Suggestion Presentation:**
+  - **Always notify user** when a task/subtask is completed with clear message and emoji ✅
+  - **Show formatted suggestion** ready to copy/paste
+  - **Include statistics** of changes (modified files, lines added/removed)
   
-  **Exemplo de apresentação:**
+  **Presentation example:**
   ```markdown
-  ✅ Task 3.2 concluída!
+  ✅ Task 3.2 completed!
   
-  📝 Sugestão de commit:
+  📝 Commit suggestion:
   ```bash
-  git commit -m "feat(module): Descrição da mudança
+  git commit -m "feat(module): Change description
   
-  - Detalhe 1
-  - Detalhe 2
+  - Detail 1
+  - Detail 2
   - Task ID: 3.2"
   ```
   
-  📊 Mudanças detectadas:
-  - 3 arquivos modificados
-  - 45 linhas adicionadas, 12 removidas
+  📊 Changes detected:
+  - 3 files modified
+  - 45 lines added, 12 removed
   ```
 
-- **Integração com RBIN Task Flow:**
-  - Após marcar uma task como concluída, automaticamente:
-    1. Verificar se há mudanças no git
-    2. Analisar arquivos modificados
-    3. Gerar sugestão de commit baseada na task
-    4. Apresentar ao usuário de forma clara
+- **Integration with RBIN Task Flow:**
+  - After marking a task as completed, automatically:
+    1. Check if there are git changes
+    2. Analyze modified files
+    3. Generate commit suggestion based on task
+    4. Present to user clearly
 
-- **Controle Git:**
-  - **NUNCA executar comandos git** - apenas sugerir
-  - Seguir [git_control.mdc](mdc:.cursor/rules/git_control.mdc) para controle total do usuário sobre git
-  - Apresentar sugestões prontas para o usuário copiar e executar
+- **Git Control:**
+  - **NEVER execute git commands** - only suggest
+  - Follow [git_control.mdc](mdc:.cursor/rules/git_control.mdc) for complete user control over git
+  - Present suggestions ready for user to copy and execute
 
-- **Referências:**
-  - Seguir padrões de [Conventional Commits](https://www.conventionalcommits.org/)
-  - Integrar com workflow do RBIN Task Flow
-  - Controle git: [git_control.mdc](mdc:.cursor/rules/git_control.mdc)
+- **References:**
+  - Follow [Conventional Commits](https://www.conventionalcommits.org/) patterns
+  - Integrate with RBIN Task Flow workflow
+  - Git control: [git_control.mdc](mdc:.cursor/rules/git_control.mdc)

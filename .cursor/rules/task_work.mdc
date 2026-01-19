@@ -7,12 +7,12 @@ alwaysApply: true
 - **Task Work - Simplified Commands:**
   - **FASTEST FORMAT**: `task-flow: run next X` (e.g., "task-flow: run next 4" → work on next 4 subtasks)
   - **TASK SPECIFIC**: `task-flow: run task X` (e.g., "task-flow: run task 1" → work on all subtasks of task 1)
-  - When user says "task-flow: run next X", "faça as próximas X subtasks", or "work on next X subtasks":
+  - When user says "task-flow: run next X" or "work on next X subtasks":
     - **INTERPRET**: User wants to work on the next X pending subtasks from RBIN Task Flow
     - **AUTOMATIC**: Read tasks, find next X pending, implement them sequentially
     - **UPDATE**: Mark each subtask as done after completion
     - **NO NEED**: To specify "task flow" explicitly - it's implied
-  - When user says "task-flow: run task X", "execute todas as subtasks da task X", or "work on task X":
+  - When user says "task-flow: run task X" or "work on task X":
     - **INTERPRET**: User wants to work on all pending subtasks of a specific task
     - **DEPENDENCY CHECK**: Before executing, verify that all tasks before X (1, 2, ..., X-1) are completely done
     - **CONFLICT PREVENTION**: Only execute subtasks of task X if no previous tasks have pending subtasks (allows parallel work by multiple AIs)
@@ -24,15 +24,15 @@ alwaysApply: true
 - **Natural Language Phrases:**
   - **FAST FORMAT**: `task-flow: run next X` or `task-flow run next X` (e.g., "task-flow: run next 4")
   - **TASK FORMAT**: `task-flow: run task X` or `task-flow run task X` (e.g., "task-flow: run task 1")
-  - "faça as próximas 3 subtasks"
+  - "work on next 3 subtasks"
   - "work on next 5 subtasks"
-  - "próximas 2 subtasks"
-  - "faça próximas subtasks"
+  - "next 2 subtasks"
+  - "work on next subtasks"
   - "implement next X subtasks"
-  - "trabalhe nas próximas X subtasks"
-  - "execute todas as subtasks da task 1"
+  - "work on next X subtasks"
+  - "execute all subtasks of task 1"
   - "work on all subtasks of task 2"
-  - Any phrase with "próximas" + number + "subtasks" or "next" + number + "subtasks"
+  - Any phrase with "next" + number + "subtasks"
   - Any phrase with "task" + number + "subtasks" or "all subtasks" + "task" + number
   
 - **Fast Command Format:**
@@ -118,7 +118,7 @@ alwaysApply: true
     3. Update `.task-flow/tasks.status.md`:
        - Change `- [ ]` to `- [x]` for the subtask
        - If all subtasks of a task are done, mark task as `- [x]`
-       - **REGENERATE SUMMARY**: Always update the "📊 Resumo" section at the top with:
+       - **REGENERATE SUMMARY**: Always update the "📊 Summary" section at the top with:
          - Count of completed tasks (✅)
          - Count of in-progress tasks (⏳)
          - Total remaining subtasks (📝)
@@ -171,16 +171,16 @@ alwaysApply: true
   7. Mark task 3 as "done" if all subtasks completed
   8. Show completion summary
   
-  User: "faça as próximas 3 subtasks"
+  User: "work on next 3 subtasks"
   AI Action: Same workflow as "run next 3", works with natural language too
   
-  User: "execute todas as subtasks da task 2"
+  User: "execute all subtasks of task 2"
   AI Action: Same workflow as "run task 2", includes dependency check
   ```
 
 - **Default Behavior:**
-  - If user says "próximas subtasks" without number → assume 1 subtask
-  - If user says "próximas X subtasks" → work on exactly X subtasks
+  - If user says "next subtasks" without number → assume 1 subtask
+  - If user says "next X subtasks" → work on exactly X subtasks
   - If user says "task X" without "next" → interpret as "run task X" (all subtasks of that task)
   - Always work sequentially (don't skip or reorder)
 

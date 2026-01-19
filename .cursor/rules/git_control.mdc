@@ -1,88 +1,88 @@
 ---
-description: Controle total do usuário sobre comandos Git - o AI nunca executa comandos git, mas pode executar qualquer outro comando sem perguntar
+description: Complete user control over Git commands - AI never executes git commands, but can execute any other command without asking
 globs: **/*
 alwaysApply: true
 ---
 
-- **Permissão Geral de Comandos:**
-  - **✅ PODE executar** qualquer comando do sistema sem perguntar
-  - **✅ PODE executar** npm, yarn, pnpm, docker, etc sem confirmação
-  - **✅ PODE executar** scripts, testes, linters, formatters sem perguntar
-  - **✅ NÃO precisa perguntar** antes de executar comandos simples ou comuns
-  - **❌ ÚNICA EXCEÇÃO**: Comandos `git` que modificam o repositório
+- **General Command Permission:**
+  - **✅ CAN execute** any system command without asking
+  - **✅ CAN execute** npm, yarn, pnpm, docker, etc without confirmation
+  - **✅ CAN execute** scripts, tests, linters, formatters without asking
+  - **✅ DON'T need to ask** before executing simple or common commands
+  - **❌ ONLY EXCEPTION**: `git` commands that modify the repository
 
-- **Comandos de Leitura - Execução Automática:**
-  - **✅ SEMPRE executar sem perguntar** comandos que apenas leem informações:
-    - `cat`, `head`, `tail`, `less`, `more` - Visualização de arquivos
-    - `grep`, `find`, `ls`, `tree` - Busca e listagem
-    - `wc`, `stat`, `file` - Informações sobre arquivos
-    - `read_file` (ferramenta) - Leitura de arquivos
-    - Qualquer comando que **não modifica** arquivos ou sistema
-  - **✅ NUNCA perguntar** antes de executar comandos de leitura
-  - **✅ Executar imediatamente** sem esperar confirmação do usuário
+- **Read Commands - Automatic Execution:**
+  - **✅ ALWAYS execute without asking** commands that only read information:
+    - `cat`, `head`, `tail`, `less`, `more` - File viewing
+    - `grep`, `find`, `ls`, `tree` - Search and listing
+    - `wc`, `stat`, `file` - File information
+    - `read_file` (tool) - File reading
+    - Any command that **does not modify** files or system
+  - **✅ NEVER ask** before executing read commands
+  - **✅ Execute immediately** without waiting for user confirmation
 
-- **Proibição Absoluta de Executar Comandos Git:**
-  - **❌ NUNCA executar** comandos `git` automaticamente
-  - **❌ NUNCA fazer** `git add`, `git commit`, `git push`, `git pull`, `git merge`, etc
-  - **❌ NUNCA modificar** o estado do repositório git
-  - **✅ APENAS sugerir** comandos git quando apropriado
-  - **✅ APENAS ler** informações do git (git status, git diff, git log) para análise
+- **Absolute Prohibition of Executing Git Commands:**
+  - **❌ NEVER execute** `git` commands automatically
+  - **❌ NEVER do** `git add`, `git commit`, `git push`, `git pull`, `git merge`, etc
+  - **❌ NEVER modify** git repository state
+  - **✅ ONLY suggest** git commands when appropriate
+  - **✅ ONLY read** git information (git status, git diff, git log) for analysis
 
-- **Comandos Git Permitidos (Apenas Leitura):**
-  - ✅ `git status` - Para verificar estado do repositório
-  - ✅ `git diff` - Para analisar mudanças
-  - ✅ `git log` - Para ver histórico
-  - ✅ `git show` - Para ver detalhes de commits
-  - ✅ `git branch` - Para listar branches (sem criar/modificar)
-  - ✅ Qualquer comando git que **apenas lê** informações
+- **Allowed Git Commands (Read Only):**
+  - ✅ `git status` - To check repository state
+  - ✅ `git diff` - To analyze changes
+  - ✅ `git log` - To view history
+  - ✅ `git show` - To view commit details
+  - ✅ `git branch` - To list branches (without creating/modifying)
+  - ✅ Any git command that **only reads** information
 
-- **Comandos Git Proibidos (Nunca Executar):**
-  - ❌ `git add` - O usuário adiciona arquivos
-  - ❌ `git commit` - O usuário faz commits
-  - ❌ `git push` - O usuário faz push
-  - ❌ `git pull` - O usuário faz pull
-  - ❌ `git merge` - O usuário faz merge
-  - ❌ `git checkout` - O usuário muda branches
-  - ❌ `git branch -d` ou `-D` - O usuário deleta branches
-  - ❌ `git reset` - O usuário faz reset
-  - ❌ `git rebase` - O usuário faz rebase
-  - ❌ `git tag` - O usuário cria tags
-  - ❌ Qualquer comando que **modifique** o repositório
+- **Prohibited Git Commands (Never Execute):**
+  - ❌ `git add` - User adds files
+  - ❌ `git commit` - User makes commits
+  - ❌ `git push` - User pushes
+  - ❌ `git pull` - User pulls
+  - ❌ `git merge` - User merges
+  - ❌ `git checkout` - User switches branches
+  - ❌ `git branch -d` or `-D` - User deletes branches
+  - ❌ `git reset` - User resets
+  - ❌ `git rebase` - User rebases
+  - ❌ `git tag` - User creates tags
+  - ❌ Any command that **modifies** the repository
 
-- **Quando Sugerir Comandos Git:**
-  - ✅ Após conclusão de task/subtask - sugerir mensagem de commit
-  - ✅ Quando há mudanças não commitadas - sugerir commit
-  - ✅ Quando há conflitos - sugerir resolução (mas não executar)
-  - ✅ Quando precisa atualizar - sugerir pull (mas não executar)
-  - ✅ Sempre apresentar como **sugestão**, nunca executar
+- **When to Suggest Git Commands:**
+  - ✅ After task/subtask completion - suggest commit message
+  - ✅ When there are uncommitted changes - suggest commit
+  - ✅ When there are conflicts - suggest resolution (but don't execute)
+  - ✅ When update is needed - suggest pull (but don't execute)
+  - ✅ Always present as **suggestion**, never execute
 
-- **Formato de Sugestões:**
+- **Suggestion Format:**
   ```markdown
-  ✅ Task concluída!
+  ✅ Task completed!
 
-  📝 Sugestão de commit (você executa):
+  📝 Commit suggestion (you execute):
   ```bash
   git add .
-  git commit -m "feat(module): Descrição"
+  git commit -m "feat(module): Description"
   ```
   ```
 
-  **NUNCA fazer:**
+  **NEVER do:**
   ```bash
-  # ❌ DON'T: Executar automaticamente
+  # ❌ DON'T: Execute automatically
   git add .
   git commit -m "..."
   ```
 
-- **Exceções e Casos Especiais:**
-  - **NENHUMA EXCEÇÃO para git**: Esta regra é absoluta para comandos git
-  - **Para comandos não-git**: Execute diretamente sem perguntar
-  - **Para comandos git**: Mesmo que o usuário peça explicitamente, **sempre sugerir** ao invés de executar
-  - Se houver dúvida sobre um comando ser git ou não, verificar se começa com `git` antes de executar
+- **Exceptions and Special Cases:**
+  - **NO EXCEPTION for git**: This rule is absolute for git commands
+  - **For non-git commands**: Execute directly without asking
+  - **For git commands**: Even if user explicitly asks, **always suggest** instead of executing
+  - If in doubt about whether a command is git or not, check if it starts with `git` before executing
 
-- **Integração com Outras Regras:**
-  - [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc) - Sugerir commits, nunca executar
-  - Workflow do RBIN Task Flow não deve incluir execução automática de git
+- **Integration with Other Rules:**
+  - [commit_practices.mdc](mdc:.cursor/rules/commit_practices.mdc) - Suggest commits, never execute
+  - RBIN Task Flow workflow should not include automatic git execution
 
-- **Princípio Fundamental:**
-  > **O usuário tem controle total sobre o repositório Git. O AI pode executar qualquer comando do sistema sem perguntar, EXCETO comandos git. Para git, apenas sugere, analisa e informa. Nunca modifica o estado do git.**
+- **Fundamental Principle:**
+  > **User has complete control over the Git repository. AI can execute any system command without asking, EXCEPT git commands. For git, only suggests, analyzes, and informs. Never modifies git state.**

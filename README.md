@@ -74,6 +74,8 @@ rbin-task-flow init          # Inicializa no projeto atual
 rbin-task-flow update        # Atualiza configurações
 rbin-task-flow version-check # Verifica atualizações de modelos
 rbin-task-flow info          # Mostra informações
+rbin-task-flow estimate <id> # Estima tempo para uma task
+rbin-task-flow report <id>  # Gera relatório de implementação de uma task
 ```
 
 ### Comandos da IA - Por Que Usar?
@@ -89,6 +91,8 @@ Após inicializar, use estes comandos na IA (Cursor/Claude/Gemini) para gerencia
 | `task-flow: status` | **Visualiza** o progresso rapidamente | Vê resumo com tasks completas, em andamento e quantas subtarefas faltam |
 | `task-flow: review` | **Garante** qualidade do trabalho | Verifica se tarefas marcadas como "done" estão realmente concluídas |
 | `task-flow: refactor` | **Melhora** código sem quebrar | Refatora código do commit atual removendo comentários e melhorando qualidade |
+| `task-flow: estimate task X` | **Estima** tempo para gestão | Calcula estimativa de tempo baseada em subtasks e nível de experiência do desenvolvedor |
+| `task-flow: report task X` | **Documenta** implementação | Gera relatório detalhado em Markdown do que foi feito para resolver a task |
 
 **Fluxo típico:**
 
@@ -433,6 +437,8 @@ rbin-task-flow init          # Initialize in current project
 rbin-task-flow update        # Update configurations
 rbin-task-flow version-check # Check for model updates
 rbin-task-flow info          # Show information
+rbin-task-flow estimate <id> # Estimate time for a task
+rbin-task-flow report <id>   # Generate implementation report for a task
 ```
 
 ### AI Commands - Why Use Them?
@@ -448,6 +454,8 @@ After initializing, use these commands in your AI (Cursor/Claude/Gemini) to auto
 | `task-flow: status` | **Visualize** progress quickly | See summary with completed tasks, in progress, and remaining subtasks |
 | `task-flow: review` | **Ensure** work quality | Verifies that tasks marked as "done" are actually completed |
 | `task-flow: refactor` | **Improve** code without breaking | Refactors code from current commit removing comments and improving quality |
+| `task-flow: estimate task X` | **Estimate** time for management | Calculates time estimate based on subtasks and developer experience level |
+| `task-flow: report task X` | **Document** implementation | Generates detailed Markdown report of what was done to resolve the task |
 
 **Typical workflow:**
 

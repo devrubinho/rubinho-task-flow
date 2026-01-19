@@ -9,10 +9,10 @@
 
 ## Screenshots:
 
-- Adicione seus screenshots na pasta `.task-flow/screens/` (PNG ou JPG)
-- O RBIN Task Flow automaticamente detecta e referencia os screenshots disponíveis ao gerar subtasks
-- Para referenciar um screenshot específico em uma task, use: `task-flow-screen nome_do_arquivo.png`
-- Exemplo: `- Criar tela de login task-flow-screen login.png`
+- Add your screenshots to the `.task-flow/screens/` folder (PNG or JPG)
+- RBIN Task Flow automatically detects and references available screenshots when generating subtasks
+- To reference a specific screenshot in a task, use: `task-flow-screen filename.png`
+- Example: `- Create login screen task-flow-screen login.png`
 
 ## Tasks:
 

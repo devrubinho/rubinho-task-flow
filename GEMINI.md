@@ -22,6 +22,8 @@ This project uses RBIN Task Flow for task management:
   - `task-flow: review` - Review completed tasks
   - `task-flow: think` - Analyze code and suggest new tasks
   - `task-flow: refactor` - Refactor code from current commit
+  - `task-flow: estimate task X` - Estimate time for task X based on subtasks and experience level
+  - `task-flow: report task X` - Generate implementation report for completed task X
 - **Files**:
   - `.task-flow/tasks.input.txt` - Define your tasks here
   - `.task-flow/tasks.status.md` - Auto-generated status (DO NOT EDIT manually)

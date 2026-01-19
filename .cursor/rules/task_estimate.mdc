@@ -1,0 +1,88 @@
+---
+description: Task time estimation based on task complexity and developer experience level
+globs: **/*
+alwaysApply: true
+---
+
+- **Task Estimation - Time Estimation for Tasks:**
+  - **FAST FORMAT**: `task-flow: estimate task X` → Estimate time for task X
+  - When user says "task-flow: estimate task X", "estimate task X", or "how long will task X take":
+    - **READ**: `.task-flow/.internal/tasks.json` to get task details
+    - **CALCULATE**: Time estimate based on number of subtasks and developer experience level
+    - **DISPLAY**: Show time estimate with intervals for 3 experience levels (junior, mid, senior)
+    - **FORMAT**: Show estimates in hours with ranges (e.g., "10-14 hours" for mid-level)
+
+- **Estimation Rules:**
+  1. **Base Calculation**: Count total number of subtasks in the task
+  2. **Experience Levels**:
+     - **Junior** (0-2 years): Base time × 1.5 multiplier
+     - **Mid-level** (3-5 years): Base time × 1.0 multiplier (baseline)
+     - **Senior** (6+ years): Base time × 0.7 multiplier
+  3. **Time per Subtask**:
+     - Simple subtask: 1-2 hours (mid-level baseline)
+     - Medium subtask: 2-4 hours (mid-level baseline)
+     - Complex subtask: 4-6 hours (mid-level baseline)
+  4. **Default Assumption**: Average 2-3 hours per subtask for mid-level (baseline)
+  5. **Range Calculation**: 
+     - Lower bound: (subtasks × 2) × multiplier
+     - Upper bound: (subtasks × 3) × multiplier
+     - Round to nearest hour
+
+- **Estimation Formula:**
+  ```
+  Base hours per subtask: 2-3 hours (mid-level)
+  
+  Junior (0-2 years):
+    Lower: (subtasks × 2) × 1.5
+    Upper: (subtasks × 3) × 1.5
+  
+  Mid-level (3-5 years):
+    Lower: subtasks × 2
+    Upper: subtasks × 3
+  
+  Senior (6+ years):
+    Lower: (subtasks × 2) × 0.7
+    Upper: (subtasks × 3) × 0.7
+  ```
+
+- **Display Format:**
+  ```
+  📊 Time Estimation for Task X: [Task Title]
+  
+  Based on [N] subtasks:
+  
+  👶 Junior (0-2 years):     [X-Y] hours
+  👨‍💼 Mid-level (3-5 years): [X-Y] hours
+  👴 Senior (6+ years):      [X-Y] hours
+  ```
+
+- **Natural Language Phrases:**
+  - **FAST FORMAT**: `task-flow: estimate task X` or `task-flow estimate task X`
+  - "estimate task X"
+  - "how long will task X take"
+  - "time estimate for task X"
+  - "quanto tempo leva a task X"
+  - Any variation asking for time estimation
+
+- **Example:**
+  ```
+  User: "task-flow: estimate task 1"
+  
+  Task 1 has 5 subtasks:
+  
+  📊 Time Estimation for Task 1: Create authentication system
+  
+  Based on 5 subtasks:
+  
+  👶 Junior (0-2 years):     15-23 hours
+  👨‍💼 Mid-level (3-5 years): 10-15 hours
+  👴 Senior (6+ years):     7-11 hours
+  ```
+
+- **Integration:**
+  - Works with [task_execution.mdc](mdc:.cursor/rules/task_execution.mdc) workflow
+  - Uses task data from `.task-flow/.internal/tasks.json`
+  - Estimates are informational only (not stored)
+
+- **Principle:**
+  > **Provide realistic time estimates based on task complexity (number of subtasks) and developer experience level. Show ranges to account for variability in implementation speed.**
