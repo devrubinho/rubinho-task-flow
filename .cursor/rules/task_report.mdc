@@ -5,8 +5,10 @@ alwaysApply: true
 ---
 
 - **Task Report - Generate Implementation Reports:**
-  - **FAST FORMAT**: `task-flow: report task X` → Generate implementation report for task X
-  - When user says "task-flow: report task X", "generate report for task X", or "create report task X":
+  - **FAST FORMAT**: `task-flow: report X` → Generate implementation report for task X (simplified - no "task" needed)
+  - **MULTIPLE TASKS**: `task-flow: report X,Y` → Generate reports for multiple tasks
+  - **ALL TASKS**: `task-flow: report all` → Generate reports for all tasks
+  - When user says "task-flow: report X", "report X", "report X,Y", "report all", "generate report for task X", or "create report task X":
     - **READ**: `.task-flow/.internal/tasks.json` to get task details
     - **READ**: `.task-flow/.internal/status.json` to verify task is completed
     - **ANALYZE**: Codebase changes related to the task (git history, file changes)
@@ -73,8 +75,11 @@ alwaysApply: true
   6. **Notes**: Additional considerations or follow-up items
 
 - **Natural Language Phrases:**
-  - **FAST FORMAT**: `task-flow: report task X` or `task-flow report task X`
-  - "generate report for task X"
+  - **FAST FORMAT**: `task-flow: report X` or `task-flow report X` (simplified)
+  - **MULTIPLE**: `task-flow: report X,Y` or `task-flow: report all`
+  - "generate report for task X" or "report X"
+  - "report tasks 10,11"
+  - "report all tasks"
   - "create report task X"
   - "document task X"
   - "report for task X"
@@ -82,7 +87,7 @@ alwaysApply: true
 
 - **Example:**
   ```
-  User: "task-flow: report task 1"
+  User: "task-flow: report 1"
   
   AI Action:
   1. Read tasks.json and status.json

@@ -5,8 +5,10 @@ alwaysApply: true
 ---
 
 - **Task Refactor - Improve Code Quality:**
-  - **FAST FORMAT**: `task-flow: refactor` → Refactor code from current commit
-  - When user says "task-flow: refactor" or "refactor current tasks":
+  - **FAST FORMAT**: `task-flow: refactor X` or `task-flow: refactor X,Y` or `task-flow: refactor all` → Refactor specific task(s)
+  - **SIMPLIFIED SYNTAX**: No need to say "task" - just use the number: `task-flow: refactor 1` instead of `task-flow: refactor task 1`
+  - **REQUIRED**: Task ID is required - use `task-flow: refactor all` to refactor all tasks
+  - When user says "task-flow: refactor X", "task-flow: refactor X,Y", "task-flow: refactor all", or "refactor tasks":
     - **IDENTIFY**: Files changed in current commit (or staged changes)
     - **REFACTOR**: Improve code quality without changing functionality
     - **REMOVE**: All explanatory comments (following code_comments.mdc rules)
@@ -51,20 +53,21 @@ alwaysApply: true
   5. Show summary of changes
 
 - **Natural Language Phrases:**
-  - **FAST FORMAT**: `task-flow: refactor` or `task-flow refactor`
-  - "refactor current tasks"
-  - "refactor code from commit"
+  - **FAST FORMAT**: `task-flow: refactor X` or `task-flow: refactor X,Y` or `task-flow: refactor all`
+  - "refactor task 1"
+  - "refactor tasks 10,11"
+  - "refactor all tasks"
   - "improve code quality"
   - "clean up code"
-  - Any variation asking to refactor/improve code
+  - Any variation asking to refactor/improve code (must include task ID or "all")
 
 - **Example:**
   ```
-  User: "task-flow: refactor"
+  User: "task-flow: refactor 1"
   
   AI Action:
-  1. Check git diff or staged files
-  2. Identify files changed in current commit
+  1. Identify files related to task 1 (from git history or task implementation)
+  2. Read each file
   3. For each file:
      - Remove explanatory comments
      - Improve code structure
@@ -73,6 +76,14 @@ alwaysApply: true
   4. Preserve separation comments
   5. Verify functionality unchanged
   6. Show refactoring summary
+  
+  User: "task-flow: refactor all"
+  
+  AI Action:
+  1. Process all tasks
+  2. Identify files for each task
+  3. Refactor all files
+  4. Show summary
   ```
 
 - **Integration:**

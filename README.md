@@ -60,7 +60,7 @@ rbin-task-flow init
 # Edite .task-flow/tasks.input.txt e use:
 # - task-flow: sync
 # - task-flow: run next X
-# - task-flow: run task X
+# - task-flow: run X (ou task-flow: run X,Y ou task-flow: run all)
 ```
 
 **Pronto!** RBIN Task Flow agora está disponível globalmente no seu sistema.
@@ -74,8 +74,8 @@ rbin-task-flow init          # Inicializa no projeto atual
 rbin-task-flow update        # Atualiza configurações
 rbin-task-flow version-check # Verifica atualizações de modelos
 rbin-task-flow info          # Mostra informações
-rbin-task-flow estimate <id> # Estima tempo para uma task
-rbin-task-flow report <id>  # Gera relatório de implementação de uma task
+rbin-task-flow estimate <ids> # Estima tempo (ex: "1" ou "1,2" ou "all")
+rbin-task-flow report <ids>  # Gera relatório (ex: "1" ou "1,2" ou "all")
 ```
 
 ### Comandos da IA - Por Que Usar?
@@ -86,13 +86,15 @@ Após inicializar, use estes comandos na IA (Cursor/Claude/Gemini) para gerencia
 |---------|--------------|-------------------|
 | `task-flow: sync` | **Sincroniza** tarefas do arquivo texto com o sistema | Mantém tudo sincronizado automaticamente - adiciona novas, remove deletadas, preserva seu progresso |
 | `task-flow: think` | **Descobre** tarefas que você esqueceu | Analisa código e sugere tarefas que faltam (testes, refatoração, documentação) |
-| `task-flow: run next X` | **Automatiza** o trabalho nas próximas subtarefas | A IA trabalha nas próximas X subtarefas sequencialmente, você só acompanha |
-| `task-flow: run task X` | **Completa** uma tarefa inteira de uma vez | Executa todas as subtarefas de uma tarefa específica (permite trabalho paralelo) |
 | `task-flow: status` | **Visualiza** o progresso rapidamente | Vê resumo com tasks completas, em andamento e quantas subtarefas faltam |
-| `task-flow: review` | **Garante** qualidade do trabalho | Verifica se tarefas marcadas como "done" estão realmente concluídas |
-| `task-flow: refactor` | **Melhora** código sem quebrar | Refatora código do commit atual removendo comentários e melhorando qualidade |
-| `task-flow: estimate task X` | **Estima** tempo para gestão | Calcula estimativa de tempo baseada em subtasks e nível de experiência do desenvolvedor |
-| `task-flow: report task X` | **Documenta** implementação | Gera relatório detalhado em Markdown do que foi feito para resolver a task |
+| `task-flow: run next X` | **Automatiza** o trabalho nas próximas subtarefas | A IA trabalha nas próximas X subtarefas sequencialmente, você só acompanha |
+| `task-flow: run X` | **Completa** uma tarefa inteira de uma vez | Executa todas as subtarefas de uma tarefa específica (permite trabalho paralelo) |
+| `task-flow: run X,Y` | **Completa** múltiplas tarefas | Executa tarefas separadas por vírgula (ex: `task-flow: run 10,11`) |
+| `task-flow: run all` | **Completa** todas as tarefas | Executa todas as tarefas pendentes |
+| `task-flow: review X` | **Garante** qualidade do trabalho | Verifica tarefas específicas (ex: `task-flow: review 1` ou `task-flow: review 10,11` ou `task-flow: review all`) |
+| `task-flow: refactor X` | **Melhora** código sem quebrar | Refatora tarefas específicas (ex: `task-flow: refactor 1` ou `task-flow: refactor 10,11` ou `task-flow: refactor all`) |
+| `task-flow: estimate X` | **Estima** tempo para gestão | Calcula estimativa de tempo (ex: `task-flow: estimate 1` ou `task-flow: estimate 10,11`) |
+| `task-flow: report X` | **Documenta** implementação | Gera relatório detalhado (ex: `task-flow: report 1` ou `task-flow: report 10,11`) |
 
 **Fluxo típico:**
 
@@ -423,7 +425,7 @@ rbin-task-flow init
 # Edit .task-flow/tasks.input.txt and use:
 # - task-flow: sync
 # - task-flow: run next X
-# - task-flow: run task X
+# - task-flow: run X (or task-flow: run X,Y or task-flow: run all)
 ```
 
 **That's it!** RBIN Task Flow is now available globally on your system.
@@ -437,8 +439,8 @@ rbin-task-flow init          # Initialize in current project
 rbin-task-flow update        # Update configurations
 rbin-task-flow version-check # Check for model updates
 rbin-task-flow info          # Show information
-rbin-task-flow estimate <id> # Estimate time for a task
-rbin-task-flow report <id>   # Generate implementation report for a task
+rbin-task-flow estimate <ids> # Estimate time (e.g., "1" or "1,2" or "all")
+rbin-task-flow report <ids>   # Generate report (e.g., "1" or "1,2" or "all")
 ```
 
 ### AI Commands - Why Use Them?
@@ -449,13 +451,15 @@ After initializing, use these commands in your AI (Cursor/Claude/Gemini) to auto
 |---------|------------|-------------|
 | `task-flow: sync` | **Sync** tasks from text file with system | Keeps everything synchronized automatically - adds new, removes deleted, preserves your progress |
 | `task-flow: think` | **Discover** tasks you forgot | Analyzes code and suggests missing tasks (tests, refactoring, documentation) |
-| `task-flow: run next X` | **Automate** work on next subtasks | AI works on next X subtasks sequentially, you just follow along |
-| `task-flow: run task X` | **Complete** an entire task at once | Executes all subtasks of a specific task (allows parallel work) |
 | `task-flow: status` | **Visualize** progress quickly | See summary with completed tasks, in progress, and remaining subtasks |
-| `task-flow: review` | **Ensure** work quality | Verifies that tasks marked as "done" are actually completed |
-| `task-flow: refactor` | **Improve** code without breaking | Refactors code from current commit removing comments and improving quality |
-| `task-flow: estimate task X` | **Estimate** time for management | Calculates time estimate based on subtasks and developer experience level |
-| `task-flow: report task X` | **Document** implementation | Generates detailed Markdown report of what was done to resolve the task |
+| `task-flow: run next X` | **Automate** work on next subtasks | AI works on next X subtasks sequentially, you just follow along |
+| `task-flow: run X` | **Complete** an entire task at once | Executes all subtasks of a specific task (allows parallel work) |
+| `task-flow: run X,Y` | **Complete** multiple tasks | Executes comma-separated tasks (e.g., `task-flow: run 10,11`) |
+| `task-flow: run all` | **Complete** all tasks | Executes all pending tasks |
+| `task-flow: review X` | **Ensure** work quality | Verifies specific tasks (e.g., `task-flow: review 1` or `task-flow: review 10,11` or `task-flow: review all`) |
+| `task-flow: refactor X` | **Improve** code without breaking | Refactors specific tasks (e.g., `task-flow: refactor 1` or `task-flow: refactor 10,11` or `task-flow: refactor all`) |
+| `task-flow: estimate X` | **Estimate** time for management | Calculates time estimate (e.g., `task-flow: estimate 1` or `task-flow: estimate 10,11`) |
+| `task-flow: report X` | **Document** implementation | Generates detailed report (e.g., `task-flow: report 1` or `task-flow: report 10,11`) |
 
 **Typical workflow:**
 

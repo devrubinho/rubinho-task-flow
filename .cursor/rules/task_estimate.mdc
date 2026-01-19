@@ -5,8 +5,10 @@ alwaysApply: true
 ---
 
 - **Task Estimation - Time Estimation for Tasks:**
-  - **FAST FORMAT**: `task-flow: estimate task X` → Estimate time for task X
-  - When user says "task-flow: estimate task X", "estimate task X", or "how long will task X take":
+  - **FAST FORMAT**: `task-flow: estimate X` → Estimate time for task X (simplified - no "task" needed)
+  - **MULTIPLE TASKS**: `task-flow: estimate X,Y` → Estimate multiple tasks
+  - **ALL TASKS**: `task-flow: estimate all` → Estimate all tasks
+  - When user says "task-flow: estimate X", "estimate X", "estimate X,Y", "estimate all", or "how long will task X take":
     - **READ**: `.task-flow/.internal/tasks.json` to get task details
     - **CALCULATE**: Time estimate based on number of subtasks and developer experience level
     - **DISPLAY**: Show time estimate with intervals for 3 experience levels (junior, mid, senior)
@@ -57,16 +59,18 @@ alwaysApply: true
   ```
 
 - **Natural Language Phrases:**
-  - **FAST FORMAT**: `task-flow: estimate task X` or `task-flow estimate task X`
-  - "estimate task X"
+  - **FAST FORMAT**: `task-flow: estimate X` or `task-flow estimate X` (simplified)
+  - **MULTIPLE**: `task-flow: estimate X,Y` or `task-flow: estimate all`
+  - "estimate task X" or "estimate X"
+  - "estimate tasks 10,11"
+  - "estimate all tasks"
   - "how long will task X take"
   - "time estimate for task X"
-  - "quanto tempo leva a task X"
   - Any variation asking for time estimation
 
 - **Example:**
   ```
-  User: "task-flow: estimate task 1"
+  User: "task-flow: estimate 1"
   
   Task 1 has 5 subtasks:
   

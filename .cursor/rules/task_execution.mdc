@@ -21,12 +21,18 @@ alwaysApply: true
   - `task-flow: sync` - Sync new tasks from tasks.input.txt
   - `task-flow: think` - Analyze codebase and suggest new tasks
   - `task-flow: run next X` - Work on next X subtasks sequentially
-  - `task-flow: run task X` - Work on all pending subtasks of task X
+  - `task-flow: run X` - Work on all pending subtasks of task X (simplified - no "task" needed)
+  - `task-flow: run X,Y` - Work on multiple tasks (comma-separated)
+  - `task-flow: run all` - Work on all tasks
   - `task-flow: status` - Show current task status
-  - `task-flow: review` - Review completed tasks
-  - `task-flow: refactor` - Refactor code from current commit
-  - `task-flow: estimate task X` - Estimate time for task X based on subtasks and experience level
-  - `task-flow: report task X` - Generate implementation report for completed task X
+  - `task-flow: review X` - Review specific task(s) (comma-separated or "all")
+  - `task-flow: refactor X` - Refactor specific task(s) (comma-separated or "all")
+  - `task-flow: estimate X` - Estimate time for task X (simplified - no "task" needed)
+  - `task-flow: estimate X,Y` - Estimate multiple tasks (comma-separated)
+  - `task-flow: estimate all` - Estimate all tasks
+  - `task-flow: report X` - Generate implementation report for task X (simplified - no "task" needed)
+  - `task-flow: report X,Y` - Generate reports for multiple tasks (comma-separated)
+  - `task-flow: report all` - Generate reports for all tasks
 
 - **Workflow Example:**
   ```markdown

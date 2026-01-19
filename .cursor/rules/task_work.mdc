@@ -6,14 +6,17 @@ alwaysApply: true
 
 - **Task Work - Simplified Commands:**
   - **FASTEST FORMAT**: `task-flow: run next X` (e.g., "task-flow: run next 4" → work on next 4 subtasks)
-  - **TASK SPECIFIC**: `task-flow: run task X` (e.g., "task-flow: run task 1" → work on all subtasks of task 1)
+  - **TASK SPECIFIC**: `task-flow: run X` or `task-flow: run X,Y` or `task-flow: run all` (e.g., "task-flow: run 1" → work on all subtasks of task 1)
+  - **SIMPLIFIED SYNTAX**: No need to say "task" - just use the number: `task-flow: run 1` instead of `task-flow: run task 1`
   - When user says "task-flow: run next X" or "work on next X subtasks":
     - **INTERPRET**: User wants to work on the next X pending subtasks from RBIN Task Flow
     - **AUTOMATIC**: Read tasks, find next X pending, implement them sequentially
     - **UPDATE**: Mark each subtask as done after completion
     - **NO NEED**: To specify "task flow" explicitly - it's implied
-  - When user says "task-flow: run task X" or "work on task X":
-    - **INTERPRET**: User wants to work on all pending subtasks of a specific task
+  - When user says "task-flow: run X" or "task-flow: run X,Y" or "task-flow: run all":
+    - **INTERPRET**: User wants to work on all pending subtasks of specific task(s) or all tasks
+    - **MULTIPLE TASKS**: Comma-separated IDs (e.g., "10,11") processes multiple tasks sequentially
+    - **ALL TASKS**: "all" processes all tasks in order
     - **DEPENDENCY CHECK**: Before executing, verify that all tasks before X (1, 2, ..., X-1) are completely done
     - **CONFLICT PREVENTION**: Only execute subtasks of task X if no previous tasks have pending subtasks (allows parallel work by multiple AIs)
     - **PARTIAL EXECUTION**: If previous tasks have pending subtasks, inform user that task X cannot be fully executed until previous tasks are complete
@@ -23,7 +26,7 @@ alwaysApply: true
 
 - **Natural Language Phrases:**
   - **FAST FORMAT**: `task-flow: run next X` or `task-flow run next X` (e.g., "task-flow: run next 4")
-  - **TASK FORMAT**: `task-flow: run task X` or `task-flow run task X` (e.g., "task-flow: run task 1")
+  - **TASK FORMAT**: `task-flow: run X` or `task-flow: run X,Y` or `task-flow: run all` (e.g., "task-flow: run 1" or "task-flow: run 10,11" or "task-flow: run all")
   - "work on next 3 subtasks"
   - "work on next 5 subtasks"
   - "next 2 subtasks"
@@ -39,14 +42,17 @@ alwaysApply: true
   - `task-flow: run next X` → Work on next X subtasks sequentially (fastest way)
   - `task-flow run next X` → Same as above (without colon)
   - `task-flow: run next` → Work on next 1 subtask (default)
-  - `task-flow: run task X` → Work on all pending subtasks of task X
-  - `task-flow run task X` → Same as above (without colon)
+  - `task-flow: run X` → Work on all pending subtasks of task X (simplified - no "task" needed)
+  - `task-flow: run X,Y` → Work on all pending subtasks of tasks X and Y
+  - `task-flow: run all` → Work on all pending subtasks of all tasks
+  - `task-flow run X` → Same as above (without colon)
   - Examples:
     - "task-flow: run next 4" → Work on next 4 subtasks
     - "task-flow run next 3" → Work on next 3 subtasks
     - "task-flow: run next" → Work on next 1 subtask
-    - "task-flow: run task 1" → Work on all pending subtasks of task 1
-    - "task-flow run task 2" → Work on all pending subtasks of task 2
+    - "task-flow: run 1" → Work on all pending subtasks of task 1
+    - "task-flow: run 10,11" → Work on all pending subtasks of tasks 10 and 11
+    - "task-flow: run all" → Work on all pending subtasks of all tasks
 
 - **Required Actions for `task-flow: run next X`:**
   1. **Read task files**: `.task-flow/.internal/tasks.json` and `.task-flow/.internal/status.json`

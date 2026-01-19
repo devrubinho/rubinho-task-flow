@@ -40,22 +40,22 @@ program
 
 program
   .command('estimate')
-  .description('Estimate time for a task based on subtasks and experience level')
-  .argument('<taskId>', 'Task ID to estimate')
+  .description('Estimate time for task(s) based on subtasks and experience level')
+  .argument('<taskIds>', 'Task ID(s) to estimate (comma-separated or "all")')
   .option('-p, --path <path>', 'Target directory (default: current directory)')
-  .action(async (taskId, options) => {
+  .action(async (taskIds, options) => {
     const targetPath = options.path || process.cwd();
-    await estimateTask(taskId, targetPath);
+    await estimateTask(taskIds, targetPath);
   });
 
 program
   .command('report')
-  .description('Generate implementation report for a completed task')
-  .argument('<taskId>', 'Task ID to generate report for')
+  .description('Generate implementation report for completed task(s)')
+  .argument('<taskIds>', 'Task ID(s) to generate report for (comma-separated or "all")')
   .option('-p, --path <path>', 'Target directory (default: current directory)')
-  .action(async (taskId, options) => {
+  .action(async (taskIds, options) => {
     const targetPath = options.path || process.cwd();
-    await generateReport(taskId, targetPath);
+    await generateReport(taskIds, targetPath);
   });
 
 program
@@ -72,8 +72,8 @@ program
     console.log(chalk.cyan('  rbin-task-flow init') + '         - Initialize in current directory');
     console.log(chalk.cyan('  rbin-task-flow update') + '       - Update configurations');
     console.log(chalk.cyan('  rbin-task-flow version-check') + ' - Check for model updates');
-    console.log(chalk.cyan('  rbin-task-flow estimate <id>') + ' - Estimate time for a task');
-    console.log(chalk.cyan('  rbin-task-flow report <id>') + '  - Generate implementation report');
+    console.log(chalk.cyan('  rbin-task-flow estimate <ids>') + ' - Estimate time (e.g., "1" or "1,2" or "all")');
+    console.log(chalk.cyan('  rbin-task-flow report <ids>') + '  - Generate report (e.g., "1" or "1,2" or "all")');
     console.log(chalk.cyan('  rbin-task-flow info') + '         - Show this information\n');
   });
 
