@@ -1,7 +1,7 @@
 {
   "name": "rbin-task-flow",
-  "version": "1.3.0",
-  "description": "AI-powered task management for Claude, Cursor, and Gemini",
+  "version": "1.4.0",
+  "description": "AI-powered task management for Claude and Cursor",
   "main": "index.js",
   "bin": {
     "rbin-task-flow": "./bin/cli.js",
@@ -16,7 +16,6 @@
     "ai",
     "claude",
     "cursor",
-    "gemini",
     "cli",
     "task-management",
     "ai-powered"
@@ -31,11 +30,9 @@
     "bin/",
     ".cursor/",
     ".claude/",
-    ".gemini/",
     ".task-flow/",
     ".model-versions.json",
     "CLAUDE.md",
-    "GEMINI.md",
     "lib/"
   ],
   "preferGlobal": true,
