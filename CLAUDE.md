@@ -1,5 +1,9 @@
 # Claude Code Instructions
 
+## Models
+
+Claude and Cursor use the **default model** of each environment. No specific model is set in this project; do not specify or require a particular model.
+
 ## Development Rules
 
 All development rules are automatically loaded from `.cursor/rules/` directory. These rules include:

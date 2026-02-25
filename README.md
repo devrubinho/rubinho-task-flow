@@ -3,13 +3,12 @@
 <div align="center">
 
 ![Claude](https://img.shields.io/badge/Claude-Sonnet%204.5-8A2BE2?style=for-the-badge&logo=anthropic&logoColor=white)
-![Gemini](https://img.shields.io/badge/Gemini-3%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![Cursor](https://img.shields.io/badge/Cursor-IDE-blue?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![Task Flow](https://img.shields.io/badge/Task%20Flow-AI%20Powered-green?style=for-the-badge)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 ![npm](https://img.shields.io/npm/v/rbin-task-flow?style=for-the-badge)
 
-**Configuração com um comando para Claude Code, Gemini, Cursor e RBIN Task Flow em qualquer projeto**
+**Configuração com um comando para Claude Code, Cursor e RBIN Task Flow em qualquer projeto**
 
 <div style="margin-top: 20px; margin-bottom: 20px;">
   <a href="#português">🇧🇷 Português</a> | <a href="#english">🇬🇧 English</a>
@@ -36,13 +35,13 @@
 
 ## O Que É Este Projeto?
 
-RBIN Task Flow é um sistema de gerenciamento de tarefas alimentado por IA que configura automaticamente Claude Code, Gemini e Cursor IDE em qualquer projeto. Você define tarefas em texto simples e a IA gera subtarefas detalhadas e acionáveis automaticamente.
+RBIN Task Flow é um sistema de gerenciamento de tarefas alimentado por IA que configura automaticamente Claude Code e Cursor IDE em qualquer projeto. Você define tarefas em texto simples e a IA gera subtarefas detalhadas e acionáveis automaticamente.
 
 **Principais benefícios:**
 - ✅ Instalação global NPM - instale uma vez, use em qualquer projeto
 - ✅ Zero configuração - pronto para usar imediatamente
 - ✅ Gerenciamento simples - escreva tarefas em texto, a IA faz o resto
-- ✅ Múltiplos modelos de IA - Claude, Gemini e Cursor configurados
+- ✅ Múltiplos modelos de IA - Claude e Cursor configurados
 
 ## Instalação
 
@@ -80,7 +79,7 @@ rbin-task-flow report <ids>  # Gera relatório (ex: "1" ou "1,2" ou "all")
 
 ### Comandos da IA - Por Que Usar?
 
-Após inicializar, use estes comandos na IA (Cursor/Claude/Gemini) para gerenciar tarefas automaticamente:
+Após inicializar, use estes comandos na IA (Cursor/Claude) para gerenciar tarefas automaticamente:
 
 | Comando | Por Que Usar | Feature Principal |
 |---------|--------------|-------------------|
@@ -116,13 +115,13 @@ cd meu-projeto && rbin-task-flow init
 
 ## Visão Geral
 
-Repositório centralizado de configurações e regras de desenvolvimento que podem ser instaladas instantaneamente em qualquer projeto. Fornece configuração completa para Claude Code, Gemini, Cursor IDE e RBIN Task Flow - um sistema simples de gerenciamento de tarefas alimentado por IA.
+Repositório centralizado de configurações e regras de desenvolvimento que podem ser instaladas instantaneamente em qualquer projeto. Fornece configuração completa para Claude Code, Cursor IDE e RBIN Task Flow - um sistema simples de gerenciamento de tarefas alimentado por IA.
 
 ### Principais Recursos
 
 - **Instalação Global NPM** - Instale uma vez, use em qualquer lugar com `npm install -g rbin-task-flow`
 - **Gerenciamento Simples de Tarefas** - Defina tarefas em texto simples, a IA gera subtarefas detalhadas
-- **Múltiplos Modelos de IA** - Claude Code Sonnet e Gemini 3 Flash configurados e prontos para uso
+- **Múltiplos Modelos de IA** - Claude Code Sonnet configurado e pronto para uso
 - **.gitignore Discreto** - Configurações de IA ocultas com comentários genéricos
 - **Zero Configuração** - Pronto para usar imediatamente
 - **RBIN Task Flow** - Gerenciamento de tarefas alimentado por IA com interface de texto simples
@@ -131,7 +130,7 @@ Repositório centralizado de configurações e regras de desenvolvimento que pod
 
 - **Sistema Operacional:** macOS, Linux ou Windows (WSL)
 - **Ferramentas:** Git, Bash, Node.js
-- **Necessário:** Claude Code CLI, acesso à API Gemini ou Cursor IDE (com assinatura Pro)
+- **Necessário:** Claude Code CLI ou Cursor IDE (com assinatura Pro)
 
 ### Alternativa: Instalação Legacy (Sem NPM)
 
@@ -165,9 +164,6 @@ seu-projeto/
 ├── .claude/
 │   └── settings.json             # Configurações do Claude Code
 │
-├── .gemini/
-│   └── settings.json             # Configurações do Gemini
-│
 ├── .task-flow/                   # RBIN Task Flow
 │   ├── tasks.input.txt           # Definições de tarefas em texto simples (edite isso!)
 │   ├── tasks.status.md           # ⚠️ Status das tarefas (atualizado automaticamente, NÃO EDITE)
@@ -182,7 +178,6 @@ seu-projeto/
 
 Nenhuma configuração adicional necessária! Apenas certifique-se de ter:
 - Claude Code CLI instalado, OU
-- Acesso à API Gemini configurado, OU
 - Cursor IDE com assinatura Pro ativa
 
 **Você está pronto!**
@@ -203,13 +198,6 @@ Todas as regras são automaticamente ativas no Cursor. O IDE irá:
 ### Integração com Claude Code
 
 O Claude Code vem pré-configurado com:
-- Configurações personalizadas
-- Integração com RBIN Task Flow
-- Melhores práticas de desenvolvimento
-
-### Integração com Gemini
-
-O Gemini vem pré-configurado com:
 - Configurações personalizadas
 - Integração com RBIN Task Flow
 - Melhores práticas de desenvolvimento
@@ -241,11 +229,9 @@ O instalador adiciona estas entradas ao `.gitignore`:
 
 ```gitignore
 .claude/
-.gemini/
 .cursor/
 .task-flow/
 CLAUDE.md
-GEMINI.md
 ```
 
 **Por que discreto?**
@@ -290,9 +276,6 @@ rbin-task-flow/
 ├── .claude/
 │   └── settings.json             # Configurações do Claude Code
 │
-├── .gemini/
-│   └── settings.json             # Configurações do Gemini
-│
 ├── .task-flow/
 │   ├── README.md                 # Referência rápida de comandos
 │   ├── tasks.input.txt           # Template de definições de tarefas
@@ -304,7 +287,6 @@ rbin-task-flow/
 ├── .gitignore                    # Template gitignore
 ├── .model-versions.json          # Referência de versão do modelo (atualize quando novos modelos forem lançados)
 ├── CLAUDE.md                     # Instruções principais do Claude
-├── GEMINI.md                     # Instruções principais do Gemini
 ├── install.sh                    # Script de instalação
 └── README.md                     # Este arquivo
 ```
@@ -315,11 +297,11 @@ rbin-task-flow/
 - ✅ Use RBIN Task Flow em **projetos que recebem** as configurações via instalação
 - 🔄 O instalador **sempre sobrescreve** configurações existentes
 - 🤫 As entradas do .gitignore são **discretas** (sem menções a IA)
-- 🎯 Funciona com **Claude Code CLI**, **API Gemini** ou **Cursor Pro**
+- 🎯 Funciona com **Claude Code CLI** ou **Cursor Pro**
 - 📦 O diretório Task Flow (`.task-flow/`) é **automaticamente gitignored**
 - 📝 Defina tarefas em `.task-flow/tasks.input.txt` usando formato simples: `- Descrição da tarefa`
 - 🚀 **Instalação Global NPM**: `npm install -g rbin-task-flow`, depois use `rbin-task-flow init` em qualquer projeto
-- 🔒 **Chaves de API podem ser necessárias** - depende do seu provedor de IA (Claude Code, API Gemini ou Cursor Pro)
+- 🔒 **Chaves de API podem ser necessárias** - depende do seu provedor de IA (Claude Code ou Cursor Pro)
 - 🔔 **Verificação de versão do modelo** - Use `rbin-task-flow version-check` para verificar versões mais recentes dos modelos (verificação rápida e local)
 
 ## Atualizando Versões dos Modelos
@@ -337,16 +319,11 @@ Quando novas versões de modelos forem lançadas, atualize `.model-versions.json
     "current": "claude-sonnet-4-5-20250929",
     "latest": "NOVA_VERSÃO_AQUI",
     "checkUrl": "https://docs.cursor.com/models"
-  },
-  "gemini": {
-    "current": "gemini-3-flash",
-    "latest": "NOVA_VERSÃO_AQUI",
-    "checkUrl": "https://ai.google.dev/models/gemini"
   }
 }
 ```
 
-O instalador verificará automaticamente versões mais recentes dos modelos e **perguntará individualmente** se você deseja atualizar cada um (Claude, Cursor, Gemini). Esta verificação é **rápida e local** - sem chamadas de API, sem solicitações de rede, apenas uma simples comparação de strings.
+O instalador verificará automaticamente versões mais recentes dos modelos e **perguntará individualmente** se você deseja atualizar cada um (Claude, Cursor). Esta verificação é **rápida e local** - sem chamadas de API, sem solicitações de rede, apenas uma simples comparação de strings.
 
 **Atualizações Interativas:** Quando uma versão mais recente estiver disponível, o instalador irá:
 - Mostrar versões atuais e mais recentes
@@ -401,13 +378,13 @@ Para problemas ou perguntas:
 
 ## What Is This Project?
 
-RBIN Task Flow is an AI-powered task management system that automatically configures Claude Code, Gemini, and Cursor IDE in any project. You define tasks in plain text and the AI automatically generates detailed, actionable subtasks.
+RBIN Task Flow is an AI-powered task management system that automatically configures Claude Code and Cursor IDE in any project. You define tasks in plain text and the AI automatically generates detailed, actionable subtasks.
 
 **Key benefits:**
 - ✅ Global NPM installation - install once, use in any project
 - ✅ Zero configuration - ready to use immediately
 - ✅ Simple management - write tasks in text, AI does the rest
-- ✅ Multiple AI models - Claude, Gemini, and Cursor configured
+- ✅ Multiple AI models - Claude and Cursor configured
 
 ## Installation
 
@@ -445,7 +422,7 @@ rbin-task-flow report <ids>   # Generate report (e.g., "1" or "1,2" or "all")
 
 ### AI Commands - Why Use Them?
 
-After initializing, use these commands in your AI (Cursor/Claude/Gemini) to automatically manage tasks:
+After initializing, use these commands in your AI (Cursor/Claude) to automatically manage tasks:
 
 | Command | Why Use It | Key Feature |
 |---------|------------|-------------|
@@ -481,13 +458,13 @@ cd my-project && rbin-task-flow init
 
 ## Overview
 
-A centralized repository of development configurations and rules that can be instantly installed in any project. Provides complete setup for Claude Code, Gemini, Cursor IDE, and RBIN Task Flow - a simple AI-powered task management system.
+A centralized repository of development configurations and rules that can be instantly installed in any project. Provides complete setup for Claude Code, Cursor IDE, and RBIN Task Flow - a simple AI-powered task management system.
 
 ### Key Features
 
 - **NPM Global Installation** - Install once, use everywhere with `npm install -g rbin-task-flow`
 - **Simple Task Management** - Define tasks in plain text, AI generates detailed subtasks
-- **Multiple AI Models** - Claude Code Sonnet and Gemini 3 Flash configured and ready to use
+- **Multiple AI Models** - Claude Code Sonnet configured and ready to use
 - **Discrete .gitignore** - AI configs hidden with generic comments
 - **Zero Configuration** - Ready to use immediately
 - **RBIN Task Flow** - AI-powered task management with simple text interface
@@ -496,7 +473,7 @@ A centralized repository of development configurations and rules that can be ins
 
 - **Operating System:** macOS, Linux, or Windows (WSL)
 - **Tools:** Git, Bash, Node.js
-- **Required:** Claude Code CLI, Gemini API access, or Cursor IDE (with Pro subscription)
+- **Required:** Claude Code CLI or Cursor IDE (with Pro subscription)
 
 ### Alternative: Legacy Installation (Without NPM)
 
@@ -530,9 +507,6 @@ your-project/
 ├── .claude/
 │   └── settings.json             # Claude Code settings
 │
-├── .gemini/
-│   └── settings.json             # Gemini settings
-│
 ├── .task-flow/                   # RBIN Task Flow
 │   ├── tasks.input.txt           # Plain text task definitions (edit this!)
 │   ├── tasks.status.md           # ⚠️ Task status (auto-updated, DO NOT EDIT)
@@ -547,7 +521,6 @@ your-project/
 
 No additional configuration required! Just make sure you have:
 - Claude Code CLI installed, OR
-- Gemini API access configured, OR
 - Cursor IDE with an active Pro subscription
 
 **You're ready!**
@@ -568,13 +541,6 @@ All rules are automatically active in Cursor. The IDE will:
 ### Claude Code Integration
 
 Claude Code is pre-configured with:
-- Custom settings
-- RBIN Task Flow integration
-- Development best practices
-
-### Gemini Integration
-
-Gemini is pre-configured with:
 - Custom settings
 - RBIN Task Flow integration
 - Development best practices
@@ -606,11 +572,9 @@ The installer adds these entries to `.gitignore`:
 
 ```gitignore
 .claude/
-.gemini/
 .cursor/
 .task-flow/
 CLAUDE.md
-GEMINI.md
 ```
 
 **Why discrete?**
@@ -655,9 +619,6 @@ rbin-task-flow/
 ├── .claude/
 │   └── settings.json             # Claude Code settings
 │
-├── .gemini/
-│   └── settings.json             # Gemini settings
-│
 ├── .task-flow/
 │   ├── README.md                 # Quick commands reference
 │   ├── tasks.input.txt           # Task definitions template
@@ -669,7 +630,6 @@ rbin-task-flow/
 ├── .gitignore                    # Template gitignore
 ├── .model-versions.json          # Model version reference (update when new models are released)
 ├── CLAUDE.md                     # Main Claude instructions
-├── GEMINI.md                     # Main Gemini instructions
 ├── install.sh                    # Installation script
 └── README.md                     # This file
 ```
@@ -680,11 +640,11 @@ rbin-task-flow/
 - ✅ Use RBIN Task Flow in **projects that receive** the configs via installation
 - 🔄 Installer **always overwrites** existing configs
 - 🤫 .gitignore entries are **discrete** (no AI mentions)
-- 🎯 Works with **Claude Code CLI**, **Gemini API**, or **Cursor Pro**
+- 🎯 Works with **Claude Code CLI** or **Cursor Pro**
 - 📦 Task Flow directory (`.task-flow/`) is **automatically gitignored**
 - 📝 Define tasks in `.task-flow/tasks.input.txt` using simple format: `- Task description`
 - 🚀 **NPM Global Install**: `npm install -g rbin-task-flow`, then use `rbin-task-flow init` in any project
-- 🔒 **API keys may be required** - depends on your AI provider (Claude Code, Gemini API, or Cursor Pro)
+- 🔒 **API keys may be required** - depends on your AI provider (Claude Code or Cursor Pro)
 - 🔔 **Model version checking** - Use `rbin-task-flow version-check` to check for newer model versions (fast, local check)
 
 ## Updating Model Versions
@@ -702,16 +662,11 @@ When new model versions are released, update `.model-versions.json` in this repo
     "current": "claude-sonnet-4-5-20250929",
     "latest": "NEW_VERSION_HERE",
     "checkUrl": "https://docs.cursor.com/models"
-  },
-  "gemini": {
-    "current": "gemini-3-flash",
-    "latest": "NEW_VERSION_HERE",
-    "checkUrl": "https://ai.google.dev/models/gemini"
   }
 }
 ```
 
-The installer will automatically check for newer model versions and **ask you individually** if you want to update each one (Claude, Cursor, Gemini). This check is **fast and local** - no API calls, no network requests, just a simple string comparison.
+The installer will automatically check for newer model versions and **ask you individually** if you want to update each one (Claude, Cursor). This check is **fast and local** - no API calls, no network requests, just a simple string comparison.
 
 **Interactive Updates:** When a newer version is available, the installer will:
 - Show current and latest versions

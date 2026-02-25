@@ -1,17 +1,1 @@
-{
-  "claude": {
-    "current": "claude-sonnet-4-5-20250929",
-    "latest": "claude-sonnet-4-5-20250929",
-    "checkUrl": "https://docs.anthropic.com/claude/docs/models-overview"
-  },
-  "cursor": {
-    "current": "claude-sonnet-4-5-20250929",
-    "latest": "claude-sonnet-4-5-20250929",
-    "checkUrl": "https://docs.cursor.com/models"
-  },
-  "gemini": {
-    "current": "gemini-3-flash",
-    "latest": "gemini-3-flash",
-    "checkUrl": "https://ai.google.dev/models/gemini"
-  }
-}
+{"claude":{"current":"claude-sonnet-4-5-20250929","latest":"claude-sonnet-4-5-20250929","checkUrl":"https://docs.anthropic.com/claude/docs/models-overview"},"cursor":{"current":"claude-sonnet-4-5-20250929","latest":"claude-sonnet-4-5-20250929","checkUrl":"https://docs.cursor.com/models"}}

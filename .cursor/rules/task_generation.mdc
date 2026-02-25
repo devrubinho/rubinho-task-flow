@@ -7,31 +7,32 @@ alwaysApply: true
 - **Task Generation - Direct and Efficient:**
   - When user asks to "Read tasks.input.txt and generate detailed subtasks updating task status":
     - **READ**: `.task-flow/tasks.input.txt` (only process lines starting with `- `)
-    - **READ**: `.task-flow/screens/` directory to list available screenshots (ALWAYS check this directory)
+    - **READ**: `.task-flow/contexts/` directory to list available context files (ALWAYS check this directory)
     - **GENERATE**: Two JSON files and one markdown file with the exact structure below
     - **SAVE**: All files to `.task-flow/`
     - **DON'T**: Check existing JSONs, explore codebase, or ask questions
 
-- **Screenshot Reference System:**
-  - **AUTOMATIC**: Always check `.task-flow/screens/` directory for available screenshots (PNG, JPG files)
-  - **NO LISTING NEEDED**: Don't require screenshots to be listed in tasks.input.txt - always scan the directory
-  - **AUTOMATIC MATCHING**: Automatically match screenshots to tasks based on keywords (e.g., "login" → `login_recover_signup.png`, "dashboard" → `dashboard.png`, "paciente" → `patient.png`)
-  - **SPECIFIC REFERENCE**: If task contains `task-flow-screen nome_do_arquivo.png`, reference that specific screenshot from `.task-flow/screens/`
-  - **PATH ALWAYS**: `task-flow-screen` always references files in `.task-flow/screens/` directory
-  - **INCLUDE**: Add screenshot reference in instructions: "Visual reference: `.task-flow/screens/filename.png`"
+- **Context Reference System:**
+  - **PURPOSE**: `.task-flow/contexts/` is for AIs to consult reference material (any type: .md, .txt, .png, .jpg, .json, etc.) when generating and working on tasks
+  - **AUTOMATIC**: Always check `.task-flow/contexts/` directory for available context files (all file types)
+  - **NO LISTING NEEDED**: Don't require context files to be listed in tasks.input.txt - always scan the directory
+  - **AUTOMATIC MATCHING**: Match context files to tasks by keywords (e.g., "login" → `login-mockup.png` or `api-login.md`, "dashboard" → `dashboard.png`)
+  - **SPECIFIC REFERENCE**: If task contains `task-flow-screen nome_arquivo.ext`, reference that file from `.task-flow/contexts/`
+  - **PATH ALWAYS**: `task-flow-screen` always references files in `.task-flow/contexts/`
+  - **INCLUDE**: In subtask instructions, add the reference: "Context/reference: `.task-flow/contexts/filename.ext`" (or "Visual reference" for images)
 
 - **Required Actions:**
   1. Read `tasks.input.txt`:
      - Process task lines (only process lines starting with `- `)
      - Check for `task-flow-screen nome_do_arquivo.png` markers in task descriptions
-  2. **ALWAYS** list available screenshots from `.task-flow/screens/` directory (PNG, JPG files)
+  2. **ALWAYS** list available context files from `.task-flow/contexts/` directory (all file types: .md, .txt, .png, .jpg, .json, etc.)
   3. For each task line, create a task with sequential ID starting at 1
   4. Generate 3-8 subtasks per task with:
      - Clear title
      - Brief description
      - Step-by-step instructions (3-5 steps)
-     - **AUTOMATIC**: Include relevant screenshot references when applicable (match by keywords)
-     - **SPECIFIC**: If task has `task-flow-screen nome_do_arquivo.png`, reference that specific screenshot from `.task-flow/screens/`
+     - **AUTOMATIC**: Include relevant context references when applicable (match by keywords)
+     - **SPECIFIC**: If task has `task-flow-screen nome_arquivo.ext`, reference that file from `.task-flow/contexts/`
   5. Create `.task-flow/.internal/tasks.json` with structure below
   6. Create `.task-flow/.internal/status.json` with all tasks/subtasks as "pending"
   7. Create `.task-flow/tasks.status.md` with all tasks and subtasks marked as `- [ ]` (pending)
@@ -117,26 +118,27 @@ alwaysApply: true
 
 - **Example:**
   - Input (`tasks.input.txt`): `- Create authentication system`
-  - Screenshots available: `login_recover_signup.png`
-  - Output: Task with ID 1, 5 subtasks with screenshot references:
-    - Subtask 1: "Setup database schema" (no screenshot)
-    - Subtask 2: "Create login form" → Instructions include: "Visual reference: `.task-flow/screens/login_recover_signup.png`"
-    - Subtask 3: "Implement registration" → Instructions include screenshot reference
-    - Subtask 4: "Add JWT authentication" (no screenshot)
-    - Subtask 5: "Test authentication flow" → Instructions include screenshot reference
+  - Context files available: `login_recover_signup.png`
+  - Output: Task with ID 1, 5 subtasks with context references:
+    - Subtask 1: "Setup database schema" (no context)
+    - Subtask 2: "Create login form" → Instructions include: "Visual reference: `.task-flow/contexts/login_recover_signup.png`"
+    - Subtask 3: "Implement registration" → Instructions include context reference
+    - Subtask 4: "Add JWT authentication" (no context)
+    - Subtask 5: "Test authentication flow" → Instructions include context reference
   
-- **Screenshot Reference Examples:**
-  - Task: `- Dentist authentication system` → Automatically matches and references `login_recover_signup.png` from `.task-flow/screens/`
-  - Task: `- Basic dashboard with structure task-flow-screen dashboard.png` → References specific `.task-flow/screens/dashboard.png`
-  - Task: `- Complete patient CRUD` → Automatically matches and references `patient.png` and `patient_profile.png` from `.task-flow/screens/` if available
-  - **IMPORTANT**: `task-flow-screen` always references files in `.task-flow/screens/` - no need to specify full path
+- **Context Reference Examples:**
+  - Task: `- Dentist authentication system` → Automatically matches and references `login_recover_signup.png` from `.task-flow/contexts/`
+  - Task: `- Basic dashboard with structure task-flow-screen dashboard.png` → References specific `.task-flow/contexts/dashboard.png`
+  - Task: `- Complete patient CRUD` → Automatically matches and references `patient.png` and `patient_profile.png` from `.task-flow/contexts/` if available
+  - **IMPORTANT**: `task-flow-screen` always references files in `.task-flow/contexts/` - no need to specify full path
+  - **FILE TYPES**: Contexts can be any type (images, markdown, text, JSON, etc.) for the AI to read and use when working on tasks
 
 - **Critical Rules:**
   - ✅ Be direct: Read → Generate → Save
-  - ✅ **ALWAYS** check `.task-flow/screens/` directory for available screenshots (automatic, no need to list in tasks.input.txt)
-  - ✅ Automatically match and reference relevant screenshots in subtask instructions based on keywords
-  - ✅ Support `task-flow-screen nome_do_arquivo.png` format - always references `.task-flow/screens/nome_do_arquivo.png`
-  - ✅ No exploration of codebase beyond screenshots directory
+  - ✅ **ALWAYS** check `.task-flow/contexts/` directory for available context files (automatic, no need to list in tasks.input.txt)
+  - ✅ Automatically match and reference relevant context files in subtask instructions based on keywords
+  - ✅ Support `task-flow-screen nome_do_arquivo.png` format - always references `.task-flow/contexts/nome_do_arquivo.png`
+  - ✅ No exploration of codebase beyond `.task-flow/contexts/` directory
   - ✅ No questions - just generate
   - ✅ Use current timestamp for `createdAt`
   - ✅ All statuses start as "pending"

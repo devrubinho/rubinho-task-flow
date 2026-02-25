@@ -5,11 +5,12 @@ alwaysApply: true
 ---
 
 - **General Command Permission:**
-  - **✅ CAN execute** any system command without asking
-  - **✅ CAN execute** npm, yarn, pnpm, docker, etc without confirmation
-  - **✅ CAN execute** scripts, tests, linters, formatters without asking
+  - **✅ CAN execute** any system command without asking (Claude may run commands without asking for approval)
+  - **✅ CAN execute** npm, yarn, pnpm, docker, scripts, tests, linters, formatters without confirmation
   - **✅ DON'T need to ask** before executing simple or common commands
-  - **❌ ONLY EXCEPTION**: `git` commands that modify the repository
+  - **❌ EXCEPTIONS** (do not execute without user approval):
+    - **Git**: `git` commands that modify the repository (add, commit, push, pull, merge, checkout, etc.)
+    - **Cloud/remote resources**: Commands that run or connect to cloud/remote resources (e.g. database connections, cloud CLI that provisions resources, migrations against remote DB, deploying to production)
 
 - **Read Commands - Automatic Execution:**
   - **✅ ALWAYS execute without asking** commands that only read information:
@@ -85,4 +86,4 @@ alwaysApply: true
   - RBIN Task Flow workflow should not include automatic git execution
 
 - **Fundamental Principle:**
-  > **User has complete control over the Git repository. AI can execute any system command without asking, EXCEPT git commands. For git, only suggests, analyzes, and informs. Never modifies git state.**
+  > **Claude may execute commands without asking, except: (1) git commands that modify the repository, and (2) commands that run cloud/remote resources (e.g. database, cloud provisioning). For those, only suggest or ask for approval.**

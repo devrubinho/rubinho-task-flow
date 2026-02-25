@@ -1,0 +1,29 @@
+# Example Context
+
+This folder (`.task-flow/contexts/`) is for AIs to consult reference material when working on tasks.
+
+## Purpose
+
+- **Contexts** = any files that help the AI understand what to build or how to do it
+- The AI reads and uses these files when generating subtasks and when implementing them
+- Different file types are supported: images, docs, specs, examples, etc.
+
+## Supported file types (examples)
+
+- **Images:** `.png`, `.jpg` – mockups, screenshots, diagrams
+- **Text / docs:** `.md`, `.txt` – specs, requirements, notes
+- **Data / config:** `.json`, `.yaml` – examples, schema, sample data
+- **Other:** any file that is useful as context for the task
+
+## How to use
+
+1. Add your context files to this folder with descriptive names (e.g. kebab-case)
+2. RBIN Task Flow lists and references them when generating subtasks
+3. To reference a specific file in a task, use: `task-flow-screen filename.ext`
+
+## Example names
+
+- `login-mockup.png`
+- `api-contract.json`
+- `requirements.md`
+- `dashboard-spec.txt`

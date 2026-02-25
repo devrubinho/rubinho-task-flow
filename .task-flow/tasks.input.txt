@@ -7,12 +7,13 @@
 3. Use `task-flow: sync` to generate subtasks from your tasks
 4. Use `task-flow: status` to view task progress
 
-## Screenshots:
+## Contexts:
 
-- Add your screenshots to the `.task-flow/screens/` folder (PNG or JPG)
-- RBIN Task Flow automatically detects and references available screenshots when generating subtasks
-- To reference a specific screenshot in a task, use: `task-flow-screen filename.png`
-- Example: `- Create login screen task-flow-screen login.png`
+- The `.task-flow/contexts/` folder is for AIs to consult when working on tasks (different file types: .md, .txt, .png, .jpg, .json, etc.)
+- Add specs, mockups, requirements, examples, or any reference file to this folder
+- RBIN Task Flow detects and references them when generating and implementing subtasks
+- To reference a specific context in a task: `task-flow-screen filename.ext`
+- Example: `- Create login screen task-flow-screen login-mockup.png`
 
 ## Tasks:
 

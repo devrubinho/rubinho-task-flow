@@ -10,7 +10,7 @@ const chalk = require('chalk');
 
 program
   .name('rbin-task-flow')
-  .description('AI-powered task management for Claude, Cursor, and Gemini')
+  .description('AI-powered task management for Claude and Cursor')
   .version(require('../package.json').version);
 
 program
@@ -65,7 +65,7 @@ program
     console.log('\n' + chalk.cyan('╔════════════════════════════════════════════════════════════════╗'));
     console.log(chalk.cyan('║') + '        ' + chalk.magenta('✨ RBIN Task Flow ✨') + '                           ' + chalk.cyan('║'));
     console.log(chalk.cyan('╚════════════════════════════════════════════════════════════════╝') + '\n');
-    console.log(chalk.blue('AI-powered task management for Claude, Cursor, and Gemini'));
+    console.log(chalk.blue('AI-powered task management for Claude and Cursor'));
     console.log(chalk.yellow('\nVersion:'), require('../package.json').version);
     console.log(chalk.yellow('Repository:'), 'https://github.com/rbinoliveira/rbin-task-flow');
     console.log(chalk.yellow('\nCommands:'));

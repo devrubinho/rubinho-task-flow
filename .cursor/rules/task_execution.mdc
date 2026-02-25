@@ -6,6 +6,7 @@ alwaysApply: true
 
 - **RBIN Task Flow - AI-Powered Task Management:**
   - This project uses **RBIN Task Flow** for task tracking and management
+  - **Models**: Claude and Cursor use the **default model** of each environment. Do not specify or require a particular model.
   - **IMPORTANT**: When user mentions "task flow", they always refer to **RBIN Task Flow**
   - Tasks are defined in plain text: `.task-flow/tasks.input.txt`
   - Task data is stored in: `.task-flow/.internal/` (do not edit directly - internal system files)

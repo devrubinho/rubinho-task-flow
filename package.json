@@ -4,8 +4,8 @@
   "description": "AI-powered task management for Claude and Cursor",
   "main": "index.js",
   "bin": {
-    "rbin-task-flow": "./bin/cli.js",
-    "task-flow": "./bin/cli.js"
+    "rbin-task-flow": "bin/cli.js",
+    "task-flow": "bin/cli.js"
   },
   "scripts": {
     "test": "echo \"No tests yet\"",
@@ -24,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rbinoliveira/rbin-task-flow.git"
+    "url": "git+https://github.com/rbinoliveira/rbin-task-flow.git"
   },
   "files": [
     "bin/",
